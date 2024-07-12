@@ -10,12 +10,12 @@ type HomeData struct {
 	Message string
 }
 
-func Home(w http.ResponseWriter, r *http.Request, renderer *render.Template) {
+func Home(w http.ResponseWriter, r *http.Request, tmpl *render.Template) {
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
 		return
 	}
-	err := renderer.Render(w, "index", HomeData{"Hello, world"})
+	err := tmpl.Render(w, "index", HomeData{"Hello, world"})
 	if err != nil {
 		log.Println("template render error:", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)

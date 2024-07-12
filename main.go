@@ -21,9 +21,8 @@ func main() {
 	mux := http.NewServeMux()
 	mux.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("client/public/"))))
 	tmpl := render.NewTemplateRenderer("client/public/html/*.html")
-	renderer := &render.Template{Templates: tmpl}
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		handler.Home(w, r, renderer)
+		handler.Home(w, r, tmpl)
 	})
 
 	fmt.Println("✅ server running")
