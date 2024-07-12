@@ -19,8 +19,8 @@ func main() {
 	}
 
 	mux := http.NewServeMux()
-	// mux.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("public/"))))
-	tmpl := render.NewTemplateRenderer("templates/*.html")
+	mux.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("client/public/"))))
+	tmpl := render.NewTemplateRenderer("client/public/html/*.html")
 	renderer := &render.Template{Templates: tmpl}
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		handler.Home(w, r, renderer)
