@@ -18,11 +18,19 @@ func main() {
 		log.Fatal("Port not defined")
 	}
 
+	tmpls, _ := render.NewTemplateRender("client/public/html")
+	for _, tmpl := range tmpls.Tmpls {
+		fmt.Println(tmpl.Name())
+		fmt.Println(tmpl.DefinedTemplates())
+	}
+
 	mux := http.NewServeMux()
 	mux.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("client/public/"))))
-	tmpl := render.NewTemplateRenderer("client/public/html/*.html")
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		handler.Home(w, r, tmpl)
+		handler.Home(w, r, tmpls)
+	})
+	mux.HandleFunc("/work/", func(w http.ResponseWriter, r *http.Request) {
+		handler.Work(w, r, tmpls)
 	})
 
 	fmt.Println("✅ server running")
