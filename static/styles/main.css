@@ -17,16 +17,15 @@
 	main {
 		height: 100%;
 		width: 100%;
-		background-color: #1a191d;
 	}
 
 	/* html {
 		font-family: "Source Serif Pro", serif;
 	} */
 
-	main {
+	/* main {
 		position: relative;
 		display: flex;
 		flex-direction: column;
-	}
+	} */
 }

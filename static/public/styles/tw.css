@@ -1,6 +1,6 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Source+Serif+Pro:wght@200;300;400;600;700&display=swap"); */
 
-/* ! tailwindcss v3.4.4 | MIT License | https://tailwindcss.com */
+/* ! tailwindcss v3.4.7 | MIT License | https://tailwindcss.com */
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -458,18 +458,17 @@ html,
 	main {
   height: 100%;
   width: 100%;
-  background-color: #1a191d;
 }
 
 /* html {
 		font-family: "Source Serif Pro", serif;
 	} */
 
-main {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
+/* main {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+	} */
 
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
@@ -577,40 +576,4 @@ main {
   --tw-contain-layout:  ;
   --tw-contain-paint:  ;
   --tw-contain-style:  ;
-}
-
-.block {
-  display: block;
-}
-
-.grid {
-  display: grid;
-}
-
-.h-full {
-  height: 100%;
-}
-
-.place-content-center {
-  place-content: center;
-}
-
-.bg-emerald-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(16 185 129 / var(--tw-bg-opacity));
-}
-
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.text-orange-600 {
-  --tw-text-opacity: 1;
-  color: rgb(234 88 12 / var(--tw-text-opacity));
 }

@@ -22,7 +22,7 @@ go.work
 go.work.sum
 
 .env
-
 .DS_Store
-
 node_modules
+*_templ.go
+tmp
