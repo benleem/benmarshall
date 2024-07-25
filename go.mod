@@ -1,4 +1,4 @@
-module benmarshall
+module github.com/benleem/benmarshall
 
 go 1.22.5
 

@@ -1,11 +1,11 @@
 package main
 
 import (
-	"benmarshall/internal/handlers"
 	"fmt"
 	"log"
 	"os"
 
+	"github.com/benleem/benmarshall/internal/handlers"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 )

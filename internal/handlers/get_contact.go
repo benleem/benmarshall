@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"benmarshall/internal/templates"
 	"context"
 
+	"github.com/benleem/benmarshall/internal/templates"
 	"github.com/labstack/echo"
 )
 
