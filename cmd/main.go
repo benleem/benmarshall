@@ -10,6 +10,8 @@ import (
 	"github.com/labstack/echo"
 )
 
+//go:generate npx tailwindcss build -i static/styles/main.css -o static/styles/tw.css -m
+
 func main() {
 	_ = godotenv.Load(".env")
 	port, portOk := os.LookupEnv("PORT")
