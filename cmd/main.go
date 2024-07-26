@@ -1,7 +1,6 @@
 package main
 
 import (
-	"embed"
 	"fmt"
 	"log"
 	"os"
@@ -10,9 +9,6 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 )
-
-//go:embed static/*
-var static embed.FS
 
 func main() {
 	_ = godotenv.Load(".env")
