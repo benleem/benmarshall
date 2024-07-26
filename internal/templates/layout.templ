@@ -1,14 +1,17 @@
 package templates
 
 templ Layout(contents templ.Component, title string) {
-	@head(title)
-	<body class="bg-primary-emerald">
-		@header()
-		<main>
-			@contents
-		</main>
-		@footer()
-	</body>
+	<!DOCTYPE html>
+	<html lang="en">
+		@head(title)
+		<body class="bg-primary-emerald">
+			@header()
+			<main>
+				@contents
+			</main>
+			@footer()
+		</body>
+	</html>
 }
 
 templ head(title string) {
@@ -27,7 +30,7 @@ templ head(title string) {
 
 templ header() {
 	<aside class="flex justify-end z-[1] fixed top-0 right-0 p-2">
-		<ul class="flex gap-2">
+		<ul hx-boost="true" class="flex gap-2">
 			<li>
 				<a
 					class="font-sans font-medium italic tracking-wide text-xl text-primary-orange no-underline hover:text-stone-300"
