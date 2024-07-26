@@ -26,4 +26,4 @@ go.work.sum
 node_modules
 *_templ.go
 tmp
-# static/styles/tw.css
+static/styles/tw.css

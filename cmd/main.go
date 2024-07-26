@@ -1,6 +1,7 @@
 package main
 
 import (
+	"embed"
 	"fmt"
 	"log"
 	"os"
@@ -10,7 +11,8 @@ import (
 	"github.com/labstack/echo"
 )
 
-//go:generate npx tailwindcss build -i static/styles/main.css -o static/styles/tw.css -m
+//go:embed static/*
+var static embed.FS
 
 func main() {
 	_ = godotenv.Load(".env")
