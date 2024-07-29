@@ -1,6 +1,5 @@
-run:
-	templ generate
-	go build -o ./tmp ./cmd/main.go && air
+dev:
+	air
 client:
 	npm i
 css:
