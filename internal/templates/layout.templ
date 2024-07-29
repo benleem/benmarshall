@@ -1,15 +1,16 @@
 package templates
 
-templ Layout(contents templ.Component, title string) {
+import "github.com/benleem/benmarshall/internal/templates/components"
+
+templ Layout(contents templ.Component, title string, navData []components.NavData) {
 	<!DOCTYPE html>
 	<html lang="en">
 		@head(title)
-		<body class="bg-primary-emerald">
-			@header()
+		<body class="bg-primary-emerald flex">
+			@sidebar(navData)
 			<main>
 				@contents
 			</main>
-			@footer()
 		</body>
 	</html>
 }
@@ -28,34 +29,11 @@ templ head(title string) {
 	</head>
 }
 
-templ header() {
-	<aside class="flex justify-end z-[1] fixed top-0 right-0 p-2">
-		<ul hx-boost="true" class="flex gap-2">
-			<li>
-				<a
-					class="font-sans font-medium italic tracking-wide text-xl text-primary-orange no-underline hover:text-stone-300"
-					href="/"
-				>Home</a>
-			</li>
-			<li>
-				<a
-					class="font-sans font-medium italic tracking-wide text-xl text-primary-orange no-underline hover:text-stone-300"
-					href="/work"
-				>Work</a>
-			</li>
-			<li>
-				<a
-					class="font-sans font-medium italic tracking-wide text-xl text-primary-orange no-underline hover:text-stone-300"
-					href="/contact"
-				>Contact</a>
-			</li>
-		</ul>
-	</aside>
-}
-
-templ footer() {
-	<aside class="flex justify-end z-[1] fixed bottom-0 left-0">
-		<ul class="p-2 flex flex-col gap-1">
+templ sidebar(navLinks []components.NavData) {
+	<aside class="p-4 h-full flex flex-col items-center justify-between">
+		@components.NavLinks(navLinks, true)
+		<span class="my-1 h-full w-[1px] bg-primary-orange"></span>
+		<ul class="flex flex-col gap-1 justify-end">
 			<li>
 				<a class="group" target="_blank" href="https://github.com/benleem">
 					<svg

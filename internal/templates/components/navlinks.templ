@@ -1,0 +1,44 @@
+package components
+
+type NavData struct {
+	Title string
+	Link  templ.SafeURL
+}
+
+templ NavLinks(navLinks []NavData, isVert bool) {
+	<nav hx-boost="true">
+		if isVert == true {
+			@navVert(navLinks)
+		} else {
+			@navHor(navLinks)
+		}
+	</nav>
+}
+
+templ navVert(navLinks []NavData) {
+	<ul class="flex flex-col items-center">
+		for i, anchor := range navLinks {
+			<a
+				class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange no-underline hover:text-bone"
+				href={ anchor.Link }
+			>{ anchor.Title }</a>
+			if i < len(navLinks) - 1 {
+				<span class="text-vertical py-0.5 text-primary-orange font-bold">•</span>
+			}
+		}
+	</ul>
+}
+
+templ navHor(navLinks []NavData) {
+	<ul class="flex">
+		for i, anchor := range navLinks {
+			<a
+				class="w-max text-base font-sans font-semibold tracking-wide text-primary-orange no-underline hover:text-bone"
+				href={ anchor.Link }
+			>{ anchor.Title }</a>
+			if i < len(navLinks) - 1 {
+				<span class="px-0.5 text-primary-orange font-bold">•</span>
+			}
+		}
+	</ul>
+}

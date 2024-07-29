@@ -29,3 +29,11 @@
 		flex-direction: column;
 	} */
 }
+
+@layer utilities {
+	.text-vertical {
+		writing-mode: vertical-rl;
+		transform: rotate(180deg);
+		text-orientation: mixed;
+	}
+}
