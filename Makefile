@@ -2,5 +2,5 @@ dev:
 	air
 client:
 	npm i
-css:
+tailwind:
 	npx tailwindcss -i static/styles/main.css -o static/styles/tw.css --watch

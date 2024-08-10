@@ -1,4 +1,4 @@
-package handlers
+package routes
 
 import (
 	"context"
@@ -9,15 +9,15 @@ import (
 	"github.com/labstack/echo"
 )
 
-type WorkHandler struct{}
+type ContactHandler struct{}
 
-func NewWorkHandler() *WorkHandler {
-	return &WorkHandler{}
+func NewContactHandler() *ContactHandler {
+	return &ContactHandler{}
 }
 
-func (h *WorkHandler) Init(c echo.Context) error {
-	page := pages.Work()
-	navData := []components.NavData{{"Home", "/"}, {"Contact", "/contact"}}
+func (h *ContactHandler) Init(c echo.Context) error {
+	page := pages.Contact()
+	navData := []components.NavData{{"Home", "/"}, {"Work", "/work"}}
 	return templates.Layout(page, "benmarshall", navData).Render(context.Background(), c.Response().Writer)
 	// if err != nil {
 	// 	http.Error(w, "Error rendering template", http.StatusInternalServerError)

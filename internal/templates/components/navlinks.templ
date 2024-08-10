@@ -6,7 +6,7 @@ type NavData struct {
 }
 
 templ NavLinks(navLinks []NavData, isVert bool) {
-	<nav hx-boost="true">
+	<nav>
 		if isVert == true {
 			@navVert(navLinks)
 		} else {

@@ -1,4 +1,4 @@
-package handlers
+package routes
 
 import (
 	"context"
@@ -16,6 +16,13 @@ func NewHomeHandler() *HomeHandler {
 }
 
 func (h *HomeHandler) Init(c echo.Context) error {
+	// fmt.Println(c.Path())
+	// if c.Path() != "/" {
+	// 	page := pages.NotFound()
+	// 	dummyNav := []components.NavData{{"Work", "/work"}, {"Contact", "/contact"}, {"Home", "/"}}
+	// 	return templates.Layout(page, "benmarshall", dummyNav).Render(context.Background(), c.Response().Writer)
+
+	// }
 	navData := []components.NavData{{"Work", "/work"}, {"Contact", "/contact"}}
 	page := pages.Home(navData)
 	dummyNav := []components.NavData{}
