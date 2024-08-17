@@ -1,8 +1,6 @@
 package pages
 
-import "github.com/benleem/benmarshall/internal/templates/components"
-
-templ Home(navData []components.NavData) {
+templ Home() {
 	<div
 		id="index-wrapper"
 		class="h-full mx-auto grid place-content-center max-w-4xl"
@@ -17,15 +15,14 @@ templ Home(navData []components.NavData) {
 		>
 			software developer
 		</p>
-		<p class="text-lg font-medium font-serif leading-relaxed text-stone-700">
+		<p class="text-lg font-medium font-serif leading-relaxed">
 			Duis gravida neque id enim consectetur,
 			suscipit viverra dolor sagittis. Nulla at lectus at tortor molestie
 			dignissim. Ut sed tempus risus.
 		</p>
-		<p class="pt-1 pb-2 text-lg font-medium font-serif leading-relaxed text-stone-700">
+		<p class="pt-1 pb-2 text-lg font-medium font-serif leading-relaxed">
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam
 			ante sem, ac tincidunt lectus blandit eleifend.
 		</p>
-		@components.NavLinks(navData, false)
 	</div>
 }

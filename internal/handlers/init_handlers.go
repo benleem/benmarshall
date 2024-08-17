@@ -6,18 +6,25 @@ import (
 
 	"github.com/benleem/benmarshall/internal/handlers/routes"
 	"github.com/benleem/benmarshall/internal/templates"
-	"github.com/benleem/benmarshall/internal/templates/components"
 	"github.com/benleem/benmarshall/internal/templates/pages"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
+	"golang.org/x/time/rate"
 )
 
 func Init() *echo.Echo {
 	e := echo.New()
-	e.HTTPErrorHandler = customHTTPErrorHandler
 	e.Static("/", "static")
+	e.HTTPErrorHandler = customHTTPErrorHandler
+
+	e.Pre(middleware.RemoveTrailingSlash())
+	e.Use(middleware.Recover())
+	e.Use(middleware.RateLimiter(middleware.NewRateLimiterMemoryStore(
+		rate.Limit(20),
+	)))
+
 	e.GET("/", routes.NewHomeHandler().Init)
 	e.GET("/work", routes.NewWorkHandler().Init)
-	e.GET("/contact", routes.NewContactHandler().Init)
 
 	return e
 }
@@ -30,8 +37,7 @@ func customHTTPErrorHandler(err error, c echo.Context) {
 	switch code {
 	case 404:
 		page := pages.NotFound()
-		navData := []components.NavData{{"Home", "/"}, {"Work", "/work"}, {"Contact", "/contact"}}
-		err = templates.Layout(page, "benmarshall", navData).Render(context.Background(), c.Response().Writer)
+		err = templates.Layout(page, "benmarshall").Render(context.Background(), c.Response().Writer)
 		if err != nil {
 			c.Logger().Error(err)
 		}

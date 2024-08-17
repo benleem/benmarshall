@@ -1,16 +1,18 @@
 package templates
 
-import "github.com/benleem/benmarshall/internal/templates/components"
-
-templ Layout(contents templ.Component, title string, navData []components.NavData) {
+templ Layout(contents templ.Component, title string) {
 	<!DOCTYPE html>
 	<html lang="en">
 		@head(title)
-		<body hx-boost="true" class="bg-primary-emerald flex">
-			@sidebar(navData)
-			<main>
+		<body class="flex">
+			@sidebar()
+			<main class="z-10">
 				@contents
 			</main>
+			<div class="content--canvas -z-10"></div>
+			<script src="scripts/noise.min.js"></script>
+			<script src="scripts/util.js"></script>
+			<script src="scripts/shift.js"></script>
 		</body>
 	</html>
 }
@@ -29,9 +31,9 @@ templ head(title string) {
 	</head>
 }
 
-templ sidebar(navLinks []components.NavData) {
-	<aside class="p-4 h-full flex flex-col items-center justify-between">
-		@components.NavLinks(navLinks, true)
+templ sidebar() {
+	<aside class="p-4 h-full flex flex-col items-center justify-between z-10">
+		@navLinks()
 		<span class="my-1 h-full w-[1px] bg-primary-orange"></span>
 		<ul class="flex flex-col gap-1 justify-end">
 			<li>
@@ -72,4 +74,22 @@ templ sidebar(navLinks []components.NavData) {
 			</li>
 		</ul>
 	</aside>
+}
+
+templ navLinks() {
+	<nav hx-boost="true" hx-target="main">
+		<ul class="flex flex-col items-center">
+			<a
+				hx-push-url="true"
+				class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange no-underline hover:text-bone"
+				href="/"
+			>Home</a>
+			<span class="text-vertical py-0.5 text-primary-orange font-bold">•</span>
+			<a
+				hx-push-url="true"
+				class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange no-underline hover:text-bone"
+				href="/work"
+			>Work</a>
+		</ul>
+	</nav>
 }
