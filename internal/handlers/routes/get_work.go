@@ -15,7 +15,7 @@ func NewWorkHandler() *WorkHandler {
 }
 
 func (h *WorkHandler) Init(c echo.Context) error {
-	works := []string{"Love Together", "Goggle Earth", "Chirp", "Landing Page"}
+	works := []string{"Love Together", "prattl", "Goggle Earth", "Chirp", "Landing Page"}
 	page := pages.Work(works)
 	hxReq := c.Request().Header.Get("hx-request")
 	if hxReq != "" {

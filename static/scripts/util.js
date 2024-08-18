@@ -1,3 +1,5 @@
+// https://github.com/crnacura/AmbientCanvasBackgrounds/blob/master/js/util.js
+
 const { PI, cos, sin, abs, sqrt, pow, round, random, atan2 } = Math;
 const HALF_PI = 0.5 * PI;
 const TAU = 2 * PI;

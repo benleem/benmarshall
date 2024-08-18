@@ -8,7 +8,6 @@ module.exports = {
 				"primary-emerald": "#10b981",
 				"primary-orange": "#ea580c",
 				bone: "#e3dac9",
-				// "pastel-green": "rgb(202, 255, 191)",
 				// brown: {
 				// 	50: "#fdf8f6",
 				// 	100: "#f2e8e5",

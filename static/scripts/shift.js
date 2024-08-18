@@ -1,3 +1,5 @@
+// https://github.com/crnacura/AmbientCanvasBackgrounds/blob/master/js/shift.js
+
 "use strict";
 
 const circleCount = 150;
