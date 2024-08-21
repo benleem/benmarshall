@@ -1,43 +1,71 @@
 package pages
 
-templ Work(works []string) {
+import "fmt"
+
+type WorkInfo struct {
+	Name string
+	Tags []string
+	Live templ.SafeURL
+	Code templ.SafeURL
+}
+
+templ Work(works []WorkInfo) {
 	<div
-		class="h-full flex flex-col"
+		class="h-full flex flex-col pt-2 pb-4 pr-4"
 	>
 		<h1
-			class="pt-2 pb-16 text-5xl font-semibold italic font-sans tracking-wider text-primary-orange"
+			class="pb-16 text-5xl font-semibold italic font-sans tracking-wider text-primary-orange"
 		>
 			Work
 		</h1>
-		<div class="flex-1 grid grid-cols-5 gap-8">
-			<div class="col-span-2">
-				@workList(works)
+		@workSlides(works)
+	</div>
+	<script src="scripts/glide.js"></script>
+}
+
+templ workSlides(works []WorkInfo) {
+	<div class="flex flex-1 max-w-full w-full">
+		<div class="glide h-full">
+			<div class="glide__track h-full" data-glide-el="track">
+				<ul class="glide__slides h-full">
+					for _, work := range works {
+						<li class="glide__slide h-full">
+							<div class="h-full p-2 border-2 border-bone rounded-2xl">
+								<p>{ work.Name }</p>
+								for i, tag := range work.Tags {
+									<span class="text-sm text-primary-emerald font-serif font-light tracking-wide">
+										if i < len(work.Tags) - 1 {
+											{ tag },
+										} else {
+											{ tag }
+										}
+									</span>
+								}
+								<div class="flex items-center">
+									if work.Live != "" {
+										<a class="text-sm font-sans font-semibold tracking-wide text-primary-orange hover:text-bone" href={ work.Live } target="_blank">Live</a>
+									}
+									if work.Live != "" && work.Code != "" {
+										<span class="px-0.5 text-sm text-primary-orange font-semibold">•</span>
+									}
+									if work.Code != "" {
+										<a class="text-sm font-sans font-semibold tracking-wide text-primary-orange hover:text-bone" href={ work.Code } target="_blank">Code</a>
+									}
+								</div>
+							</div>
+						</li>
+					}
+				</ul>
 			</div>
-			<div class="col-span-3 overflow-hidden rounded-tl-[3.5rem]">
-				<img class="h-full w-full object-cover block" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="project"/>
+			<div class="glide__arrows" data-glide-el="controls">
+				<button class="glide__arrow glide__arrow--left" data-glide-dir="<"></button>
+				<button class="glide__arrow glide__arrow--right" data-glide-dir=">"></button>
+			</div>
+			<div class="glide__bullets" data-glide-el="controls[nav]">
+				for i := range works {
+					<button class="glide__bullet" data-glide-dir={ fmt.Sprintf("=%v", i) }></button>
+				}
 			</div>
 		</div>
 	</div>
-}
-
-templ workList(works []string) {
-	<ul class="">
-		for i, text := range works {
-			if i < len(works) - 1 {
-				<li class="w-full border-bone border-b-2">
-					<a
-						class="block py-4 text-2xl font-semibold italic font-sans tracking-wider text-primary-orange"
-						href="/"
-					>{ text }</a>
-				</li>
-			} else {
-				<li class="w-full">
-					<a
-						class="block py-4 text-2xl font-semibold italic font-sans tracking-wider text-primary-orange"
-						href="/"
-					>{ text }</a>
-				</li>
-			}
-		}
-	</ul>
 }

@@ -25,9 +25,14 @@ templ head(title string) {
 			name="viewport"
 			content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
 		/>
-		<link rel="stylesheet" href="styles/tw.css"/>
 		<title>{ title }</title>
+		<link rel="stylesheet" href="styles/tw.css"/>
+		<!-- Required Core Stylesheet -->
+		<link rel="stylesheet" href="styles/glide.core.min.css"/>
+		<!-- Optional Theme Stylesheet -->
+		<link rel="stylesheet" href="styles/glide.theme.min.css"/>
 		<script src="https://unpkg.com/htmx.org@2.0.1" integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide" crossorigin="anonymous"></script>
 	</head>
 }
 
@@ -44,13 +49,13 @@ templ navLinks() {
 		<ul class="flex flex-col items-center">
 			<a
 				hx-push-url="true"
-				class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange no-underline hover:text-bone"
+				class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
 				href="/"
 			>Home</a>
 			<span class="text-vertical py-0.5 text-primary-orange font-bold">•</span>
 			<a
 				hx-push-url="true"
-				class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange no-underline hover:text-bone"
+				class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
 				href="/work"
 			>Work</a>
 		</ul>
