@@ -14,7 +14,7 @@ templ Work(works []WorkInfo) {
 		class="h-full flex flex-col pt-2 pb-4 pr-4"
 	>
 		<h1
-			class="pb-16 text-5xl font-semibold italic font-sans tracking-wider text-primary-orange"
+			class="pb-16 w-min text-5xl font-semibold italic font-sans tracking-wider text-primary-orange"
 		>
 			Work
 		</h1>
@@ -24,18 +24,18 @@ templ Work(works []WorkInfo) {
 }
 
 templ workSlides(works []WorkInfo) {
-	<div class="flex flex-1 max-w-full w-full">
+	<div class="grow">
 		<div class="glide h-full">
 			<div class="glide__track h-full" data-glide-el="track">
 				<ul class="glide__slides h-full">
 					for _, work := range works {
 						<li class="glide__slide h-full">
-							<div class="h-full p-2 border-2 border-bone rounded-2xl">
+							<div class="h-full p-4 border-2 border-bone rounded-2xl">
 								<p>{ work.Name }</p>
 								for i, tag := range work.Tags {
 									<span class="text-sm text-primary-emerald font-serif font-light tracking-wide">
 										if i < len(work.Tags) - 1 {
-											{ tag },
+											{ tag },{ " " }
 										} else {
 											{ tag }
 										}

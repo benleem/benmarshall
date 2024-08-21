@@ -22,16 +22,6 @@
 		height: 100%;
 		width: 100%;
 	}
-
-	/* html {
-		font-family: "Source Serif Pro", serif;
-	} */
-
-	/* main {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-	} */
 }
 
 @layer utilities {

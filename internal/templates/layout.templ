@@ -6,7 +6,7 @@ templ Layout(contents templ.Component, title string) {
 		@head(title)
 		<body class="flex">
 			@sidebar()
-			<main class="z-10">
+			<main class="z-10 overflow-hidden">
 				@contents
 			</main>
 			<div class="content--canvas -z-10"></div>
@@ -37,7 +37,7 @@ templ head(title string) {
 }
 
 templ sidebar() {
-	<aside class="p-4 h-full flex flex-col items-center justify-between z-10">
+	<aside class="p-4 z-10 h-full flex flex-col items-center justify-between" id="nav-aside">
 		@navLinks()
 		<span class="my-1 h-full w-[1px] bg-primary-emerald"></span>
 		@socialLinks()
