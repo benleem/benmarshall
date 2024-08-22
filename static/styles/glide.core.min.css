@@ -7,7 +7,8 @@
 	box-sizing: inherit;
 }
 .glide__track {
-	overflow: hidden;
+	/* overflow: hidden; */
+	overflow: visible;
 }
 .glide__slides {
 	position: relative;
@@ -16,7 +17,8 @@
 	backface-visibility: hidden;
 	transform-style: preserve-3d;
 	touch-action: pan-Y;
-	overflow: hidden;
+	/* overflow: hidden; */
+	overflow: visible;
 	margin: 0;
 	padding: 0;
 	white-space: nowrap;

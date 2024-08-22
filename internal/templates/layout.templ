@@ -6,7 +6,7 @@ templ Layout(contents templ.Component, title string) {
 		@head(title)
 		<body class="flex">
 			@sidebar()
-			<main class="z-10 overflow-hidden">
+			<main class="z-10 px-4 overflow-y-scroll">
 				@contents
 			</main>
 			<div class="content--canvas -z-10"></div>
@@ -27,17 +27,12 @@ templ head(title string) {
 		/>
 		<title>{ title }</title>
 		<link rel="stylesheet" href="styles/tw.css"/>
-		<!-- Required Core Stylesheet -->
-		<link rel="stylesheet" href="styles/glide.core.min.css"/>
-		<!-- Optional Theme Stylesheet -->
-		<link rel="stylesheet" href="styles/glide.theme.min.css"/>
 		<script src="https://unpkg.com/htmx.org@2.0.1" integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide" crossorigin="anonymous"></script>
 	</head>
 }
 
 templ sidebar() {
-	<aside class="p-4 z-10 h-full flex flex-col items-center justify-between" id="nav-aside">
+	<aside class="p-4 pr-0 z-10 h-full flex flex-col items-center justify-between" id="nav-aside">
 		@navLinks()
 		<span class="my-1 h-full w-[1px] bg-primary-emerald"></span>
 		@socialLinks()
