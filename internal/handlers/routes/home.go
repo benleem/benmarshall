@@ -14,7 +14,7 @@ func NewHomeHandler() *HomeHandler {
 	return &HomeHandler{}
 }
 
-func (h *HomeHandler) Init(c echo.Context) error {
+func (h *HomeHandler) Get(c echo.Context) error {
 	page := pages.Home()
 	hxReq := c.Request().Header.Get("hx-request")
 	if hxReq != "" {

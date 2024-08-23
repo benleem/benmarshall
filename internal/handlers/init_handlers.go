@@ -12,7 +12,7 @@ import (
 	"golang.org/x/time/rate"
 )
 
-func Init() *echo.Echo {
+func Init(key string) *echo.Echo {
 	e := echo.New()
 	e.Static("/", "static")
 	e.HTTPErrorHandler = customHTTPErrorHandler
@@ -23,8 +23,14 @@ func Init() *echo.Echo {
 		rate.Limit(20),
 	)))
 
-	e.GET("/", routes.NewHomeHandler().Init)
-	e.GET("/work", routes.NewWorkHandler().Init)
+	home := routes.NewHomeHandler()
+	work := routes.NewWorkHandler()
+	contact := routes.NewContactHandler(key)
+
+	e.GET("/", home.Get)
+	e.GET("/work", work.Get)
+	e.GET("/contact", contact.Get)
+	e.POST("/contact", contact.Post)
 
 	return e
 }

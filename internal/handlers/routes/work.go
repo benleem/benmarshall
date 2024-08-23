@@ -14,8 +14,7 @@ func NewWorkHandler() *WorkHandler {
 	return &WorkHandler{}
 }
 
-func (h *WorkHandler) Init(c echo.Context) error {
-	// works := []string{"Love Together", "prattl", "ShowBeam", "Goggle Earth", "Chirp", "CanvaCast"}
+func (h *WorkHandler) Get(c echo.Context) error {
 	works := []pages.WorkInfo{
 		{Name: "Love Together", Tags: []string{"TypeScript", "NextJs", "Tailwind"}, Live: "https://www.love-together.com/", Code: ""},
 		{Name: "prattl", Tags: []string{"Go", "Python"}, Live: "", Code: "https://github.com/benleem/prattl"},
