@@ -179,6 +179,10 @@ class ShiftCanvas extends HTMLElement {
 		window.onresize = resize;
 		// htmx.process(this);
 	}
+
+	disconnectedCallback() {
+		htmx.remove(htmx.find("canvas"));
+	}
 }
 
 class TextArea extends HTMLElement {
