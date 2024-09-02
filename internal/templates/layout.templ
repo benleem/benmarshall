@@ -9,10 +9,7 @@ templ Layout(contents templ.Component, title string) {
 			<main class="z-10 px-4 overflow-y-scroll">
 				@contents
 			</main>
-			<div class="content--canvas -z-10"></div>
-			<script src="scripts/noise.min.js"></script>
-			<script src="scripts/util.js"></script>
-			<script src="scripts/shift.js"></script>
+			<shift-canvas class="content--canvas -z-10"></shift-canvas>
 		</body>
 	</html>
 }
@@ -28,6 +25,10 @@ templ head(title string) {
 		<title>{ title }</title>
 		<link rel="stylesheet" href="styles/tw.css"/>
 		<script src="https://unpkg.com/htmx.org@2.0.1" integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" crossorigin="anonymous"></script>
+		<script>htmx.config.refreshOnHistoryMiss = true</script>
+		<script src="scripts/noise.min.js"></script>
+		<script src="scripts/util.js"></script>
+		<script defer src="scripts/components.js"></script>
 	</head>
 }
 
@@ -43,19 +44,16 @@ templ navLinks() {
 	<nav hx-boost="true" hx-target="main">
 		<ul class="flex flex-col items-center">
 			<a
-				hx-push-url="true"
 				class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
 				href="/"
 			>Home</a>
 			<span class="text-vertical py-0.5 text-primary-orange font-bold">•</span>
 			<a
-				hx-push-url="true"
 				class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
 				href="/work"
 			>Work</a>
 			<span class="text-vertical py-0.5 text-primary-orange font-bold">•</span>
 			<a
-				hx-push-url="true"
 				class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
 				href="/contact"
 			>Contact</a>

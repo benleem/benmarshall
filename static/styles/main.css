@@ -9,6 +9,8 @@
 		margin: 0;
 		color: #a3a3a3;
 		font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+		/* font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+			"Liberation Mono", "Courier New", monospace; */
 	}
 
 	html {

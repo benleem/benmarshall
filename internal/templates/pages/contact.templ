@@ -5,29 +5,31 @@ templ Contact() {
 		class="mx-auto max-w-7xl"
 	>
 		<h1
-			class="pt-2  w-min text-5xl font-semibold italic font-sans tracking-wider text-primary-orange"
+			class="pt-2 w-min text-5xl font-semibold italic font-sans tracking-wider text-primary-orange"
 		>
 			Contact
 		</h1>
 		<section class="pt-16 pb-4 grow w-full">
 			<form
-				class="flex flex-col"
+				class="p-4 flex flex-col bg-[hsla(0,0%,100%,0.1)] rounded-xl"
 				hx-post="/contact"
 				hx-target="this"
 			>
-				<label>
+				<label class="flex flex-col font-sans">
 					Name
-					<input type="text" name="name"/>
+					<input class="p-2 font-serif text-primary-dark autofill:!bg-red-500" type="text" name="name"/>
 				</label>
-				<label>
+				<label class="py-2 flex flex-col font-sans">
 					Email Address
-					<input type="email" name="email"/>
+					<input class="p-2 font-serif text-primary-dark" type="email" name="email"/>
 				</label>
-				<label>
+				<label class="flex flex-col font-sans">
 					Message
-					<textarea name="message"></textarea>
+					<text-area class="flex">
+						<textarea class="w-full resize-none p-2 font-serif text-primary-dark" rows="1" name="message" id="contact-message"></textarea>
+					</text-area>
 				</label>
-				<button type="submit">Submit</button>
+				<button class="py-4 bg-primary-orange text-primary-emerald font-sans" type="submit">Submit</button>
 			</form>
 		</section>
 	</div>

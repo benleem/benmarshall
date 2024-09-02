@@ -25,8 +25,9 @@ func (h *WorkHandler) Get(c echo.Context) error {
 		{Name: "CanvaCast", Tags: []string{"HTML", "JavaScript", "CSS"}, Live: "https://htmlpreview.github.io/?https://github.com/benleem/CanvaCast/blob/main/index.html", Code: "https://github.com/benleem/CanvaCast"},
 	}
 	page := pages.Work(works)
-	hxReq := c.Request().Header.Get("hx-request")
+	hxReq := c.Request().Header.Get("Hx-Request")
 	if hxReq != "" {
+		c.Response().Header().Set(echo.HeaderVary, "Hx-Request")
 		return page.Render(context.Background(), c.Response().Writer)
 	}
 	return templates.Layout(page, "benmarshall").Render(context.Background(), c.Response().Writer)

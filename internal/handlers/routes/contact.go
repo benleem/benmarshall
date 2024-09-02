@@ -23,8 +23,9 @@ func NewContactHandler(api_key string) *ContactHandler {
 
 func (h *ContactHandler) Get(c echo.Context) error {
 	page := pages.Contact()
-	hxReq := c.Request().Header.Get("hx-request")
+	hxReq := c.Request().Header.Get("Hx-Request")
 	if hxReq != "" {
+		c.Response().Header().Set(echo.HeaderVary, "Hx-Request")
 		return page.Render(context.Background(), c.Response().Writer)
 	}
 	return templates.Layout(page, "benmarshall").Render(context.Background(), c.Response().Writer)
