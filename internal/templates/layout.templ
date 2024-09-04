@@ -24,8 +24,8 @@ templ head(title string) {
 		/>
 		<title>{ title }</title>
 		<link rel="stylesheet" href="styles/tw.css"/>
-		<script src="https://unpkg.com/htmx.org@2.0.1" integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" crossorigin="anonymous"></script>
-		// <script>htmx.config.refreshOnHistoryMiss = true</script>
+		<script src="scripts/htmx.min.js"></script>
+		<script>htmx.config.refreshOnHistoryMiss = true</script>
 		<script src="scripts/noise.min.js"></script>
 		<script src="scripts/util.js"></script>
 		<script defer src="scripts/components.js"></script>
@@ -43,20 +43,26 @@ templ sidebar() {
 templ navLinks() {
 	<nav hx-boost="true" hx-target="main">
 		<ul class="flex flex-col items-center">
-			<a
-				class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
-				href="/"
-			>Home</a>
-			<span class="text-vertical py-0.5 text-primary-orange font-bold">•</span>
-			<a
-				class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
-				href="/work"
-			>Work</a>
-			<span class="text-vertical py-0.5 text-primary-orange font-bold">•</span>
-			<a
-				class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
-				href="/contact"
-			>Contact</a>
+			<li class="flex">
+				<a
+					class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
+					href="/"
+				>Home</a>
+			</li>
+			<li class="flex flex-col items-center">
+				<span class="text-vertical py-0.5 text-primary-orange font-bold">•</span>
+				<a
+					class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
+					href="/work"
+				>Work</a>
+				<span class="text-vertical py-0.5 text-primary-orange font-bold">•</span>
+			</li>
+			<li>
+				<a
+					class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
+					href="/contact"
+				>Contact</a>
+			</li>
 		</ul>
 	</nav>
 }

@@ -2,16 +2,9 @@
   "name": "benmarshall",
   "version": "0.0.1",
   "description": "Ben's portfolio",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/benleem/benmarshall.git"
-  },
+  "keywords": [],
   "author": "Benjamin Marshall",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/benleem/benmarshall/issues"
-  },
-  "homepage": "https://github.com/benleem/benmarshall#readme",
   "devDependencies": {
     "tailwindcss": "^3.4.4"
   }
