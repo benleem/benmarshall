@@ -28,5 +28,3 @@ node_modules
 *_templ.go
 tmp
 static/styles/tw.css
-
-.prettierignore

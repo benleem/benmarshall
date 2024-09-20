@@ -1,6 +1,7 @@
 package pages
 
 templ Contact() {
+	<title>benmarshall - contact</title>
 	<div
 		class="mx-auto max-w-7xl"
 	>
@@ -17,19 +18,19 @@ templ Contact() {
 			>
 				<label class="flex flex-col font-sans">
 					Name
-					<input class="p-2 font-serif text-primary-dark autofill:!bg-red-500" type="text" name="name"/>
+					<input class="p-2 font-serif text-primary-dark autofill:!bg-red-500 rounded-md" type="text" name="name" placeholder="John Doe"/>
 				</label>
 				<label class="py-2 flex flex-col font-sans">
 					Email Address
-					<input class="p-2 font-serif text-primary-dark" type="email" name="email"/>
+					<input class="p-2 font-serif text-primary-dark rounded-md" type="email" name="email" placeholder="johndoe@example.com"/>
 				</label>
 				<label class="flex flex-col font-sans">
 					Message
 					<text-area class="flex">
-						<textarea class="w-full resize-none p-2 font-serif text-primary-dark" rows="1" name="message" id="contact-message"></textarea>
+						<textarea class="w-full resize-none p-2 font-serif text-primary-dark rounded-md" rows="1" name="message" id="contact-message" placeholder="Your message..."></textarea>
 					</text-area>
 				</label>
-				<button class="py-4 bg-primary-orange text-primary-emerald font-sans" type="submit">Submit</button>
+				<button class="mt-4 py-4 bg-primary-orange text-xl text-bone font-sans rounded-lg font-semibold" type="submit">Submit</button>
 			</form>
 		</section>
 	</div>

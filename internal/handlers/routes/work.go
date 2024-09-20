@@ -30,7 +30,7 @@ func (h *WorkHandler) Get(c echo.Context) error {
 		c.Response().Header().Set(echo.HeaderVary, "Hx-Request")
 		return page.Render(context.Background(), c.Response().Writer)
 	}
-	return templates.Layout(page, "benmarshall").Render(context.Background(), c.Response().Writer)
+	return templates.Layout(page, "benmarshall - work").Render(context.Background(), c.Response().Writer)
 	// if err != nil {
 	// 	http.Error(w, "Error rendering template", http.StatusInternalServerError)
 	// 	return

@@ -22,18 +22,17 @@ templ head(title string) {
 			name="viewport"
 			content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
 		/>
-		<title>{ title }</title>
-		<link rel="stylesheet" href="styles/tw.css"/>
-		<script src="scripts/htmx.min.js"></script>
-		<script>htmx.config.refreshOnHistoryMiss = true</script>
-		<script src="scripts/noise.min.js"></script>
-		<script src="scripts/util.js"></script>
-		<script defer src="scripts/components.js"></script>
+		<title hx-swap-oob="true">{ title }</title>
+		<link rel="stylesheet" href="/styles/tw.css"/>
+		<script src="/scripts/htmx.min.js"></script>
+		<script src="/scripts/noise.min.js"></script>
+		<script src="/scripts/util.js"></script>
+		<script defer src="/scripts/components.js"></script>
 	</head>
 }
 
 templ sidebar() {
-	<aside class="p-4 pr-0 z-10 h-full flex flex-col items-center justify-between" id="nav-aside">
+	<aside class="p-4 pr-0 z-10 h-full flex flex-col items-center justify-between">
 		@navLinks()
 		<span class="my-1 h-full w-[1px] bg-primary-emerald"></span>
 		@socialLinks()
@@ -71,7 +70,7 @@ templ socialLinks() {
 	<ul class="flex flex-col gap-1 justify-end">
 		<li>
 			<a class="group" target="_blank" href="https://github.com/benleem">
-				<img class="block w-[32px] h-[32px] group-hover:scale-125 transition-transform duration-300 ease-in-out" src="assets/github.svg" alt="github"/>
+				<img class="block w-[32px] h-[32px] group-hover:scale-125 transition-transform duration-300 ease-in-out" src="/assets/github.svg" alt="github"/>
 			</a>
 		</li>
 		<li class="relative">
@@ -80,7 +79,7 @@ templ socialLinks() {
 				target="_blank"
 				href="https://www.linkedin.com/in/benjamin-marshall-609906196/"
 			>
-				<img class="block w-[32px] h-[32px] group-hover:scale-125 transition-transform duration-300 ease-in-out" src="assets/linkedin.svg" alt="linkedin"/>
+				<img class="block w-[32px] h-[32px] group-hover:scale-125 transition-transform duration-300 ease-in-out" src="/assets/linkedin.svg" alt="linkedin"/>
 			</a>
 		</li>
 	</ul>

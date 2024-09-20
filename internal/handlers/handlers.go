@@ -14,15 +14,15 @@ import (
 
 func Init(key string) *echo.Echo {
 	e := echo.New()
-	e.Static("/", "static")
-	e.HTTPErrorHandler = customHTTPErrorHandler
 
-	e.Pre(middleware.RemoveTrailingSlash())
+	// e.Pre(middleware.RemoveTrailingSlash())
 	e.Use(middleware.Recover())
 	e.Use(middleware.RateLimiter(middleware.NewRateLimiterMemoryStore(
 		rate.Limit(20),
 	)))
 
+	e.HTTPErrorHandler = customHTTPErrorHandler
+	e.Static("/", "static")
 	home := routes.NewHomeHandler()
 	work := routes.NewWorkHandler()
 	contact := routes.NewContactHandler(key)
@@ -40,14 +40,21 @@ func customHTTPErrorHandler(err error, c echo.Context) {
 	if he, ok := err.(*echo.HTTPError); ok {
 		code = he.Code
 	}
+	c.Logger().Error(err)
 	switch code {
 	case 404:
 		page := pages.NotFound()
-		err = templates.Layout(page, "benmarshall").Render(context.Background(), c.Response().Writer)
+		hxReq := c.Request().Header.Get("Hx-Request")
+		if hxReq != "" {
+			c.Response().Header().Set(echo.HeaderVary, "Hx-Request")
+			err := page.Render(context.Background(), c.Response().Writer)
+			if err != nil {
+				c.Logger().Error(err)
+			}
+		}
+		err := templates.Layout(page, "benmarshall - 404").Render(context.Background(), c.Response().Writer)
 		if err != nil {
 			c.Logger().Error(err)
 		}
-	default:
-		c.Logger().Error(err)
 	}
 }
