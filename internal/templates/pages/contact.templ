@@ -1,0 +1,39 @@
+package pages
+
+templ Contact(swapTitle bool) {
+	if swapTitle {
+		<title>benmarshall - contact</title>
+	}
+	<div
+		class="mx-auto max-w-7xl"
+	>
+		<h1
+			class="pt-2 w-min text-5xl font-semibold italic font-sans tracking-wider text-primary-orange"
+		>
+			Contact
+		</h1>
+		<section class="pt-16 pb-4 grow w-full">
+			<form
+				class="p-4 flex flex-col bg-[hsla(0,0%,100%,0.1)] rounded-xl"
+				hx-post="/contact"
+				hx-target="this"
+			>
+				<label class="flex flex-col font-sans">
+					Name
+					<input class="p-2 font-serif text-primary-dark autofill:!bg-red-500 rounded-md" type="text" name="name" placeholder="John Doe"/>
+				</label>
+				<label class="py-2 flex flex-col font-sans">
+					Email Address
+					<input class="p-2 font-serif text-primary-dark rounded-md" type="email" name="email" placeholder="johndoe@example.com"/>
+				</label>
+				<label class="flex flex-col font-sans">
+					Message
+					<text-area class="flex">
+						<textarea class="w-full resize-none p-2 font-serif text-primary-dark rounded-md" rows="1" name="message" id="contact-message" placeholder="Your message..."></textarea>
+					</text-area>
+				</label>
+				<button class="mt-4 py-4 bg-primary-orange text-xl text-bone font-sans rounded-lg font-semibold" type="submit">Submit</button>
+			</form>
+		</section>
+	</div>
+}

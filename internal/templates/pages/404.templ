@@ -1,0 +1,16 @@
+package pages
+
+templ NotFound(swapTitle bool) {
+	if swapTitle {
+		<title>benmarshall - 404</title>
+	}
+	<div
+		class="h-full grid place-content-center "
+	>
+		<h1
+			class="text-5xl font-semibold italic font-sans tracking-wider text-primary-orange"
+		>
+			Page Not Found <span class="not-italic">😭</span>
+		</h1>
+	</div>
+}

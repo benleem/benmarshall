@@ -1,0 +1,12 @@
+package pages
+
+templ Work(swapTitle bool, id string, work WorkInfo) {
+	if swapTitle {
+		<title>benmarshall - { work.Name }</title>
+	}
+	<div
+		class="h-full mx-auto grid place-content-center max-w-3xl"
+	>
+		<p>This is the "{ work.Name }" project page!</p>
+	</div>
+}

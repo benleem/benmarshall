@@ -21,6 +21,7 @@
 go.work
 go.work.sum
 
+.vscode
 .env
 .DS_Store
 node_modules
