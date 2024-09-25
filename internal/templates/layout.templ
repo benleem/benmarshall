@@ -4,7 +4,7 @@ templ Layout(contents templ.Component, title string) {
 	<!DOCTYPE html>
 	<html lang="en">
 		@head(title)
-		<body class="flex">
+		<body hx-boost="true" hx-target="main" class="flex">
 			@sidebar()
 			<main class="z-10 px-4 overflow-y-scroll">
 				@contents
@@ -40,7 +40,7 @@ templ sidebar() {
 }
 
 templ navLinks() {
-	<nav hx-boost="true" hx-target="main">
+	<nav>
 		<ul class="flex flex-col items-center">
 			<li class="flex">
 				<a
@@ -52,8 +52,8 @@ templ navLinks() {
 				<span class="text-vertical py-0.5 text-primary-orange font-bold">•</span>
 				<a
 					class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
-					href="/work"
-				>Work</a>
+					href="/works"
+				>Works</a>
 				<span class="text-vertical py-0.5 text-primary-orange font-bold">•</span>
 			</li>
 			<li>

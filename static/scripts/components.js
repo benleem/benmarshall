@@ -6,6 +6,7 @@ class ShiftCanvas extends HTMLElement {
 	}
 
 	connectedCallback() {
+		// https://github.com/crnacura/AmbientCanvasBackgrounds/blob/master/js/shift.js
 		const circleCount = 150;
 		const circlePropCount = 8;
 		const circlePropsLength = circleCount * circlePropCount;

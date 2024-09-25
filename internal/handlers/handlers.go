@@ -15,20 +15,20 @@ import (
 func Init(key string) *echo.Echo {
 	e := echo.New()
 
-	// e.Pre(middleware.RemoveTrailingSlash())
+	e.Pre(middleware.RemoveTrailingSlash())
 	e.Use(middleware.Recover())
 	e.Use(middleware.RateLimiter(middleware.NewRateLimiterMemoryStore(
 		rate.Limit(20),
 	)))
-
 	e.HTTPErrorHandler = customHTTPErrorHandler
 	e.Static("/", "static")
 	home := routes.NewHomeHandler()
-	work := routes.NewWorkHandler()
+	works := routes.NewWorksHandler()
 	contact := routes.NewContactHandler(key)
 
 	e.GET("/", home.Get)
-	e.GET("/work", work.Get)
+	e.GET("/works", works.GetWorks)
+	e.GET("/works/:id", works.GetWork)
 	e.GET("/contact", contact.Get)
 	e.POST("/contact", contact.Post)
 
@@ -40,7 +40,6 @@ func customHTTPErrorHandler(err error, c echo.Context) {
 	if he, ok := err.(*echo.HTTPError); ok {
 		code = he.Code
 	}
-	c.Logger().Error(err)
 	switch code {
 	case 404:
 		page := pages.NotFound()
@@ -51,10 +50,44 @@ func customHTTPErrorHandler(err error, c echo.Context) {
 			if err != nil {
 				c.Logger().Error(err)
 			}
+		} else {
+			err := templates.Layout(page, "benmarshall - 404").Render(context.Background(), c.Response().Writer)
+			if err != nil {
+				c.Logger().Error(err)
+			}
 		}
-		err := templates.Layout(page, "benmarshall - 404").Render(context.Background(), c.Response().Writer)
-		if err != nil {
-			c.Logger().Error(err)
-		}
+	default:
+		c.Logger().Error(err)
 	}
 }
+
+// func middleware(h http.Handler) http.Handler {
+// 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+// 		hxReq := r.Header.Get("Hx-Request")
+
+// 		if hxReq == "" {
+// 			urlParts := strings.Split(r.URL.String(), "?")
+// 			path := urlParts[0]
+// 			params := ""
+
+// 			if len(urlParts) > 1 {
+// 				params = string('?') + urlParts[1]
+// 			}
+
+// 			pageVariables := PageVariables{
+// 				Path:   path,
+// 				Params: params,
+// 			}
+
+// 			tmpl := template.Must(template.ParseFiles(IndexTemplates...))
+
+// 			err := tmpl.Execute(w, pageVariables)
+// 			if err != nil {
+// 				http.Error(w, err.Error(), http.StatusInternalServerError)
+// 				return
+// 			}
+// 			return
+// 		}
+// 		h.ServeHTTP(w, r)
+// 	})
+// }

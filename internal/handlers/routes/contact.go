@@ -12,12 +12,12 @@ import (
 )
 
 type ContactHandler struct {
-	api_key string
+	key string
 }
 
-func NewContactHandler(api_key string) *ContactHandler {
+func NewContactHandler(key string) *ContactHandler {
 	return &ContactHandler{
-		api_key,
+		key,
 	}
 }
 
@@ -29,10 +29,6 @@ func (h *ContactHandler) Get(c echo.Context) error {
 		return page.Render(context.Background(), c.Response().Writer)
 	}
 	return templates.Layout(page, "benmarshall - contact").Render(context.Background(), c.Response().Writer)
-	// if err != nil {
-	// 	http.Error(w, "Error rendering template", http.StatusInternalServerError)
-	// 	return
-	// }
 }
 
 func (h *ContactHandler) Post(c echo.Context) error {
@@ -42,7 +38,7 @@ func (h *ContactHandler) Post(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	data.Set("access_key", h.api_key)
+	data.Set("access_key", h.key)
 	req, _ := http.NewRequest(http.MethodPost, apiUrl, strings.NewReader(data.Encode())) // URL-encoded payload
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 	resp, err := client.Do(req)
@@ -57,9 +53,4 @@ func (h *ContactHandler) Post(c echo.Context) error {
 	}
 
 	return nil
-
-	// if err != nil {
-	// 	http.Error(w, "Error rendering template", http.StatusInternalServerError)
-	// 	return
-	// }
 }

@@ -22,9 +22,4 @@ func (h *HomeHandler) Get(c echo.Context) error {
 		return page.Render(context.Background(), c.Response().Writer)
 	}
 	return templates.Layout(page, "benmarshall").Render(context.Background(), c.Response().Writer)
-	// if err != nil {
-	// 	http.Error(w, "Error rendering template", http.StatusInternalServerError)
-	// 	return
-	// }
-
 }

@@ -1,0 +1,68 @@
+package pages
+
+import "fmt"
+
+type WorkInfo struct {
+	Id   string
+	Name string
+	Tags []string
+	Live templ.SafeURL
+	Code templ.SafeURL
+}
+
+templ Works(works []WorkInfo) {
+	<title>benmarshall - works</title>
+	<div
+		class="mx-auto max-w-7xl"
+	>
+		<h1
+			class="pt-2  w-min text-5xl font-semibold italic font-sans tracking-wider text-primary-orange"
+		>
+			Works
+		</h1>
+		@worksGrid(works)
+	</div>
+}
+
+templ worksGrid(works []WorkInfo) {
+	<section class="pt-16 pb-4">
+		<ul class="works-grid aspect-square grid grid-cols-12 grid-rows-12 gap-4">
+			for i, work := range works {
+				<li class="relative rounded-xl overflow-hidden hover:z-10 hover:scale-[1.025] transition-all ease-in-out duration-200">
+					<a class="absolute top-0 left-0 h-full w-full z-10" href={ templ.SafeURL(fmt.Sprintf("/works/%s", work.Id)) }></a>
+					<img class="h-full object-cover w-full" src={ fmt.Sprintf("https://picsum.photos/300?random=%v", i) } alt={ work.Name }/>
+					<div class="absolute top-0 left-0 h-full w-full flex flex-col justify-between bg-[hsla(0,0%,5%,0.75)]">
+						<div class="p-2">
+							<h2 class="text-2xl font-sans font-semibold tracking-wider italic text-bone">
+								{ work.Name }
+							</h2>
+							<p class="mt-1 pl-1 text-sm font-light tracking-wide border-l-2 border-primary-orange">
+								for i, tag := range work.Tags {
+									if i < len(work.Tags) - 1 {
+										{ tag },{ " " }
+									} else {
+										{ tag }
+									}
+								}
+							</p>
+						</div>
+						<div class="flex items-center justify-between">
+							<div class="pl-2 flex items-center text-primary-orange">
+								if work.Code != "" {
+									<a class="z-20 inline-block text-sm font-sans font-semibold hover:text-bone" href={ work.Code } target="_blank">Code</a>
+								}
+								if work.Code != "" && work.Live != "" {
+									<span class="px-0.5 text-sm text-primary-orange font-semibold">•</span>
+								}
+								if work.Live != "" {
+									<a class="z-20 inline-block text-sm font-sans font-semibold hover:text-bone" href={ work.Live } target="_blank">Live</a>
+								}
+							</div>
+							<p class="p-2 text-lg font-medium text-primary-emerald bg-[hsla(0,0%,100%,0.1)] rounded-tl-xl">{ fmt.Sprintf("0%v",i +1) }</p>
+						</div>
+					</div>
+				</li>
+			}
+		</ul>
+	</section>
+}
