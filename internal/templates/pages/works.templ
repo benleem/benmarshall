@@ -10,8 +10,10 @@ type WorkInfo struct {
 	Code templ.SafeURL
 }
 
-templ Works(works []WorkInfo) {
-	<title>benmarshall - works</title>
+templ Works(swapTitle bool, works []WorkInfo) {
+	if swapTitle {
+		<title>benmarshall - works</title>
+	}
 	<div
 		class="mx-auto max-w-7xl"
 	>

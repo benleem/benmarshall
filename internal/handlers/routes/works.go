@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/a-h/templ"
 	"github.com/benleem/benmarshall/internal/templates"
 	"github.com/benleem/benmarshall/internal/templates/pages"
 	"github.com/labstack/echo/v4"
@@ -30,12 +31,14 @@ func NewWorksHandler() *WorksHandler {
 }
 
 func (h *WorksHandler) GetWorks(c echo.Context) error {
-	page := pages.Works(h.Works)
+	var page templ.Component
 	hxReq := c.Request().Header.Get("Hx-Request")
 	if hxReq != "" {
+		page = pages.Works(true, h.Works)
 		c.Response().Header().Set(echo.HeaderVary, "Hx-Request")
 		return page.Render(context.Background(), c.Response().Writer)
 	}
+	page = pages.Works(false, h.Works)
 	return templates.Layout(page, "benmarshall - works").Render(context.Background(), c.Response().Writer)
 
 }
@@ -51,11 +54,14 @@ func (h *WorksHandler) GetWork(c echo.Context) error {
 	if workInfo.Id == "" {
 		return echo.ErrNotFound
 	}
-	page := pages.Work(id, workInfo)
+	var page templ.Component
+
 	hxReq := c.Request().Header.Get("Hx-Request")
 	if hxReq != "" {
+		page = pages.Work(true, id, workInfo)
 		c.Response().Header().Set(echo.HeaderVary, "Hx-Request")
 		return page.Render(context.Background(), c.Response().Writer)
 	}
+	page = pages.Work(false, id, workInfo)
 	return templates.Layout(page, fmt.Sprintf("benmarshall - %s", workInfo.Name)).Render(context.Background(), c.Response().Writer)
 }

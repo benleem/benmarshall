@@ -1,12 +1,12 @@
 package pages
 
-import "fmt"
-
-templ Work(id string, work WorkInfo) {
-	<title>benmarshall - { work.Name }</title>
+templ Work(swapTitle bool, id string, work WorkInfo) {
+	if swapTitle {
+		<title>benmarshall - { work.Name }</title>
+	}
 	<div
 		class="h-full mx-auto grid place-content-center max-w-3xl"
 	>
-		This is the { fmt.Sprintf("(%s)", work.Name) } project page!
+		<p>This is the "{ work.Name }" project page!</p>
 	</div>
 }

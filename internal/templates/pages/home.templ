@@ -1,7 +1,9 @@
 package pages
 
-templ Home() {
-	<title>benmarshall</title>
+templ Home(swapTitle bool) {
+	if swapTitle {
+		<title>benmarshall</title>
+	}
 	<div
 		class="h-full mx-auto grid place-content-center max-w-3xl"
 	>

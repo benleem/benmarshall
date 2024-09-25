@@ -1,7 +1,9 @@
 package pages
 
-templ Contact() {
-	<title>benmarshall - contact</title>
+templ Contact(swapTitle bool) {
+	if swapTitle {
+		<title>benmarshall - contact</title>
+	}
 	<div
 		class="mx-auto max-w-7xl"
 	>

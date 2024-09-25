@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/a-h/templ"
 	"github.com/benleem/benmarshall/internal/handlers/routes"
 	"github.com/benleem/benmarshall/internal/templates"
 	"github.com/benleem/benmarshall/internal/templates/pages"
@@ -42,15 +43,17 @@ func customHTTPErrorHandler(err error, c echo.Context) {
 	}
 	switch code {
 	case 404:
-		page := pages.NotFound()
+		var page templ.Component
 		hxReq := c.Request().Header.Get("Hx-Request")
 		if hxReq != "" {
+			page = pages.NotFound(true)
 			c.Response().Header().Set(echo.HeaderVary, "Hx-Request")
 			err := page.Render(context.Background(), c.Response().Writer)
 			if err != nil {
 				c.Logger().Error(err)
 			}
 		} else {
+			page = pages.NotFound(false)
 			err := templates.Layout(page, "benmarshall - 404").Render(context.Background(), c.Response().Writer)
 			if err != nil {
 				c.Logger().Error(err)

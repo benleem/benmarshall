@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/a-h/templ"
 	"github.com/benleem/benmarshall/internal/templates"
 	"github.com/benleem/benmarshall/internal/templates/pages"
 	"github.com/labstack/echo/v4"
@@ -22,12 +23,14 @@ func NewContactHandler(key string) *ContactHandler {
 }
 
 func (h *ContactHandler) Get(c echo.Context) error {
-	page := pages.Contact()
+	var page templ.Component
 	hxReq := c.Request().Header.Get("Hx-Request")
 	if hxReq != "" {
+		page = pages.Contact(true)
 		c.Response().Header().Set(echo.HeaderVary, "Hx-Request")
 		return page.Render(context.Background(), c.Response().Writer)
 	}
+	page = pages.Contact(false)
 	return templates.Layout(page, "benmarshall - contact").Render(context.Background(), c.Response().Writer)
 }
 
