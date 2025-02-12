@@ -18,11 +18,10 @@ func NewWorksHandler() *WorksHandler {
 	works := []pages.WorkInfo{
 		{Id: "love-together", Name: "Love Together", Tags: []string{"TypeScript", "NextJs", "Tailwind"}, Live: "https://www.love-together.com/", Code: ""},
 		{Id: "prattl", Name: "prattl", Tags: []string{"Go", "Python"}, Live: "", Code: "https://github.com/benleem/prattl"},
-		{Id: "show-beam-client", Name: "ShowBeam (client)", Tags: []string{"TypeScript", "SvelteKit", "Tailwind"}, Live: "", Code: "https://github.com/benleem/show_beam_client"},
-		{Id: "show-beam-server", Name: "ShowBeam (server)", Tags: []string{"Rust", "Actix Web", "MySQL", "OAuth 2.0"}, Live: "", Code: "https://github.com/benleem/show_beam_server"},
+		{Id: "llm-notes", Name: "llmnotes", Tags: []string{"Rust", "React Native", "Surreal Db"}, Live: "", Code: "https://github.com/benleem/prattl"},
+		{Id: "show-beam", Name: "ShowBeam", Tags: []string{"Go"}, Live: "", Code: "https://github.com/benleem/show_beam_client"},
 		{Id: "goggle-earth", Name: "Goggle Earth", Tags: []string{"JavaScript", "React", "CSS", "ThreeJs"}, Live: "https://goggle-earth.netlify.app/", Code: "https://github.com/benleem/threejs-test"},
-		{Id: "chirp", Name: "Chirp", Tags: []string{"JavaScript", "NextJs", "CSS Modules"}, Live: "https://chirp-social.vercel.app/", Code: "https://github.com/benleem/chirp"},
-		{Id: "canva-cast", Name: "CanvaCast", Tags: []string{"HTML", "JavaScript", "CSS"}, Live: "https://htmlpreview.github.io/?https://github.com/benleem/CanvaCast/blob/main/index.html", Code: "https://github.com/benleem/CanvaCast"},
+		// {Id: "chirp", Name: "Chirp", Tags: []string{"JavaScript", "NextJs", "CSS Modules"}, Live: "https://chirp-social.vercel.app/", Code: "https://github.com/benleem/chirp"},
 	}
 
 	return &WorksHandler{
