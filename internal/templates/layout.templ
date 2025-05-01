@@ -4,12 +4,11 @@ templ Layout(contents templ.Component, title string) {
 	<!DOCTYPE html>
 	<html lang="en">
 		@head(title)
-		<body hx-boost="true" hx-target="main" class="flex">
-			@sidebar()
-			<main class="z-10 px-4 overflow-y-scroll">
+		<body hx-boost="true" hx-target="main">
+			<main>
 				@contents
 			</main>
-			<shift-canvas class="content--canvas -z-10"></shift-canvas>
+			// <shift-canvas class="content--canvas -z-10"></shift-canvas>
 		</body>
 	</html>
 }
@@ -22,61 +21,12 @@ templ head(title string) {
 			name="viewport"
 			content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
 		/>
-		<title hx-swap-oob="true">{ title }</title>
-		<link rel="stylesheet" href="/styles/tw.css"/>
-		<script src="/scripts/htmx.min.js"></script>
-		<script src="/scripts/noise.min.js"></script>
-		<script src="/scripts/util.js"></script>
-		<script defer src="/scripts/components.js"></script>
+		<title>{ title }</title>
+		// <title hx-swap-oob="true">{ title }</title>
+		<link rel="stylesheet" href="/static/styles/main.css"/>
+		// <script src="/scripts/htmx.min.js"></script>
+		// <script src="/scripts/noise.min.js"></script>
+		// <script src="/scripts/util.js"></script>
+		// <script defer src="/scripts/components.js"></script>
 	</head>
-}
-
-templ sidebar() {
-	<aside class="p-4 pr-0 z-10 h-full flex flex-col items-center justify-between">
-		@navLinks()
-		<span class="my-1 h-full w-[1px] bg-primary-emerald"></span>
-		@socialLinks()
-	</aside>
-}
-
-templ navLinks() {
-	<nav>
-		<ul class="flex flex-col items-center">
-			<li class="flex">
-				<a
-					class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
-					href="/"
-				>Home</a>
-			</li>
-			<li class="flex flex-col items-center">
-				<span class="text-vertical py-0.5 text-primary-orange font-bold">•</span>
-				<a
-					class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
-					href="/works"
-				>Works</a>
-				<span class="text-vertical py-0.5 text-primary-orange font-bold">•</span>
-			</li>
-			<li>
-				<a
-					class="w-max text-lg text-vertical font-sans font-semibold tracking-wide text-primary-orange hover:text-bone"
-					href="/contact"
-				>Contact</a>
-			</li>
-		</ul>
-	</nav>
-}
-
-templ socialLinks() {
-	<ul class="flex flex-col gap-1 justify-end">
-		<li>
-			<a class="group" target="_blank" href="https://github.com/benleem">
-				<img class="block w-[32px] h-[32px] group-hover:scale-125 transition-transform duration-300 ease-in-out" src="/assets/github.svg" alt="github"/>
-			</a>
-		</li>
-		<li>
-			<a class="group" target="_blank" href="https://www.linkedin.com/in/benjamin-marshall-609906196/">
-				<img class="block w-[32px] h-[32px] group-hover:scale-125 transition-transform duration-300 ease-in-out" src="/assets/linkedin.svg" alt="linkedin"/>
-			</a>
-		</li>
-	</ul>
 }

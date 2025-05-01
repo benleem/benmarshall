@@ -1,12 +1,12 @@
 package routes
 
 import (
-	"context"
+	"fmt"
+	"net/http"
 
 	"github.com/a-h/templ"
 	"github.com/benleem/benmarshall/internal/templates"
 	"github.com/benleem/benmarshall/internal/templates/pages"
-	"github.com/labstack/echo/v4"
 )
 
 type HomeHandler struct{}
@@ -15,14 +15,10 @@ func NewHomeHandler() *HomeHandler {
 	return &HomeHandler{}
 }
 
-func (h *HomeHandler) Get(c echo.Context) error {
+func (h *HomeHandler) Get(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r.Context().Value("htmx"))
+
 	var page templ.Component
-	hxReq := c.Request().Header.Get("Hx-Request")
-	if hxReq != "" {
-		page = pages.Home(true)
-		c.Response().Header().Set(echo.HeaderVary, "Hx-Request")
-		return page.Render(context.Background(), c.Response().Writer)
-	}
-	page = pages.Home(false)
-	return templates.Layout(page, "benmarshall").Render(context.Background(), c.Response().Writer)
+	page = pages.Home()
+	templates.Layout(page, "benmarshall").Render(r.Context(), w)
 }

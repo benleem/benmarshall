@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/benleem/benmarshall/internal/handlers"
@@ -36,8 +37,8 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	e := handlers.Init(config.emailKey)
+	mux := handlers.Init(config.emailKey)
 	fmt.Println("✅ server running")
 	fmt.Printf("localhost%s\n", config.port)
-	e.Logger.Fatal(e.Start(config.port))
+	log.Fatalln(http.ListenAndServe(config.port, mux))
 }
