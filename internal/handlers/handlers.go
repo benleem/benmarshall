@@ -3,94 +3,64 @@ package handlers
 import (
 	"context"
 	"net/http"
+	"path/filepath"
 
-	"github.com/a-h/templ"
 	"github.com/benleem/benmarshall/internal/handlers/routes"
-	"github.com/benleem/benmarshall/internal/templates"
-	"github.com/benleem/benmarshall/internal/templates/pages"
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
-	"golang.org/x/time/rate"
 )
 
-func Init(key string) *echo.Echo {
-	e := echo.New()
+func Init(key string) *http.ServeMux {
+	mux := http.NewServeMux()
 
-	e.Pre(middleware.RemoveTrailingSlash())
-	e.Use(middleware.Recover())
-	e.Use(middleware.RateLimiter(middleware.NewRateLimiterMemoryStore(
-		rate.Limit(20),
-	)))
-	e.HTTPErrorHandler = customHTTPErrorHandler
-	e.Static("/", "static")
+	fileServer := http.FileServer(neuteredFileSystem{http.Dir("./static")})
 	home := routes.NewHomeHandler()
-	works := routes.NewWorksHandler()
-	contact := routes.NewContactHandler(key)
 
-	e.GET("/", home.Get)
-	e.GET("/works", works.GetWorks)
-	e.GET("/works/:id", works.GetWork)
-	e.GET("/contact", contact.Get)
-	e.POST("/contact", contact.Post)
+	mux.Handle("GET /static", http.NotFoundHandler())
+	mux.Handle("GET /static/", http.StripPrefix("/static", fileServer))
+	mux.Handle("GET /{$}", htmxMiddleware(http.HandlerFunc(home.Get)))
 
-	return e
+	return mux
 }
 
-func customHTTPErrorHandler(err error, c echo.Context) {
-	code := http.StatusInternalServerError
-	if he, ok := err.(*echo.HTTPError); ok {
-		code = he.Code
+type neuteredFileSystem struct {
+	fs http.FileSystem
+}
+
+func (nfs neuteredFileSystem) Open(path string) (http.File, error) {
+	f, err := nfs.fs.Open(path)
+	if err != nil {
+		return nil, err
 	}
-	switch code {
-	case 404:
-		var page templ.Component
-		hxReq := c.Request().Header.Get("Hx-Request")
-		if hxReq != "" {
-			page = pages.NotFound(true)
-			c.Response().Header().Set(echo.HeaderVary, "Hx-Request")
-			err := page.Render(context.Background(), c.Response().Writer)
-			if err != nil {
-				c.Logger().Error(err)
+
+	s, err := f.Stat()
+	if err != nil {
+		return nil, err
+	}
+
+	if s.IsDir() {
+		index := filepath.Join(path, "index.html")
+		if _, err := nfs.fs.Open(index); err != nil {
+			closeErr := f.Close()
+			if closeErr != nil {
+				return nil, closeErr
 			}
-		} else {
-			page = pages.NotFound(false)
-			err := templates.Layout(page, "benmarshall - 404").Render(context.Background(), c.Response().Writer)
-			if err != nil {
-				c.Logger().Error(err)
-			}
+
+			return nil, err
 		}
-	default:
-		c.Logger().Error(err)
 	}
+
+	return f, nil
 }
 
-// func middleware(h http.Handler) http.Handler {
-// 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-// 		hxReq := r.Header.Get("Hx-Request")
-
-// 		if hxReq == "" {
-// 			urlParts := strings.Split(r.URL.String(), "?")
-// 			path := urlParts[0]
-// 			params := ""
-
-// 			if len(urlParts) > 1 {
-// 				params = string('?') + urlParts[1]
-// 			}
-
-// 			pageVariables := PageVariables{
-// 				Path:   path,
-// 				Params: params,
-// 			}
-
-// 			tmpl := template.Must(template.ParseFiles(IndexTemplates...))
-
-// 			err := tmpl.Execute(w, pageVariables)
-// 			if err != nil {
-// 				http.Error(w, err.Error(), http.StatusInternalServerError)
-// 				return
-// 			}
-// 			return
-// 		}
-// 		h.ServeHTTP(w, r)
-// 	})
-// }
+func htmxMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		hxReq := r.Header.Get("Hx-Request")
+		if hxReq != "" {
+			r.Header.Set("Vary", "Hx-Request")
+			// return page.Render(context.Background(), c.Response().Writer)
+			next.ServeHTTP(w, r.WithContext(context.WithValue(context.Background(), "htmx", true)))
+			return
+		}
+		// return templates.Layout(page, "benmarshall").Render(context.Background(), c.Response().Writer)
+		next.ServeHTTP(w, r.WithContext(context.WithValue(context.Background(), "htmx", false)))
+	})
+}
