@@ -18,13 +18,13 @@ type HomeHandler struct {
 
 func NewHomeHandler() *HomeHandler {
 	skillKeys := []string{"tools", "languages", "technologies"}
-	projectKeys := []string{"experience", "projects"}
-
 	skills := pages.Skills{
 		skillKeys[0]: []string{"git"},
 		skillKeys[1]: []string{"golang", "typescript", "javascript"},
 		skillKeys[2]: []string{"docker", "html", "css", "tailwind", "react", "nextjs", "htmx"},
 	}
+
+	projectKeys := []string{"experience", "projects"}
 	projects := pages.Projects{
 		projectKeys[0]: {{Name: "Love Together", Description: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at tortor mauris. Suspendisse at dolor ac eros iaculis tristique eget tincidunt quam. Suspendisse eu accumsan sapien. Suspendisse potenti. Sed auctor massa diam, at sodales mi gravida non. Etiam a vestibulum sem, at iaculis odio. Sed ut velit vitae risus suscipit interdum a nec dui. Nam pellentesque interdum fringilla. ", Tags: []string{"asdad", "sadasd"}, Github: "", Live: "", Image: ""}},
 		projectKeys[1]: {
@@ -33,6 +33,7 @@ func NewHomeHandler() *HomeHandler {
 			{Name: "goscrape", Description: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at tortor mauris. Suspendisse at dolor ac eros iaculis tristique eget tincidunt quam. Suspendisse eu accumsan sapien. Suspendisse potenti. Sed auctor massa diam, ", Tags: []string{"asdad", "sadasd"}, Github: "", Live: "", Image: ""},
 		},
 	}
+
 	return &HomeHandler{skills, skillKeys, projects, projectKeys}
 }
 
