@@ -16,7 +16,10 @@ type Config struct {
 }
 
 func NewConfig() (*Config, error) {
-	_ = godotenv.Load(".env")
+	err := godotenv.Load(".env")
+	if err != nil {
+		return nil, err
+	}
 	port, portOk := os.LookupEnv("PORT")
 	if !portOk {
 		return nil, fmt.Errorf("port not defined")

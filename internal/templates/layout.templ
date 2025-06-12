@@ -8,7 +8,6 @@ templ Layout(contents templ.Component, title string) {
 			<main>
 				@contents
 			</main>
-			// <shift-canvas class="content--canvas -z-10"></shift-canvas>
 		</body>
 	</html>
 }
@@ -23,10 +22,10 @@ templ head(title string) {
 		/>
 		<title>{ title }</title>
 		// <title hx-swap-oob="true">{ title }</title>
-		<link rel="stylesheet" href="/static/styles/main.css"/>
-		// <script src="/scripts/htmx.min.js"></script>
-		// <script src="/scripts/noise.min.js"></script>
-		// <script src="/scripts/util.js"></script>
-		// <script defer src="/scripts/components.js"></script>
+		<link rel="icon" type="image/png" href="/static/assets/cyberslug-nobg.png"/>
+		<link rel="stylesheet" href="/static/styles/reset.css"/>
+		<link rel="stylesheet" href="/static/styles/monospace-web.css"/>
+		// <script src="/static/scripts/htmx.min.js"></script>
+		<script defer src="/static/scripts/components.js"></script>
 	</head>
 }
