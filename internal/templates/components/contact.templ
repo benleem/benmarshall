@@ -1,0 +1,40 @@
+package components
+
+templ Contact() {
+	<h2>Send me a message:</h2>
+	<form
+		id="contact-form"
+		hx-post="/contact"
+		hx-target="#status"
+		hx-on::after-request="if(event.detail.xhr.response.includes('success')) this.reset()"
+	>
+		<label>
+			Name
+			<input type="text" name="name" placeholder="John Doe"/>
+		</label>
+		<label>
+			Email Address
+			<input type="email" name="email" placeholder="johndoe@example.com"/>
+		</label>
+		<label>
+			Message
+			<text-area>
+				<textarea style="resize: none;" rows="3" name="message" id="contact-message" placeholder="Your message..."></textarea>
+			</text-area>
+		</label>
+		<div class="grid">
+			<span>
+				<button type="reset">Clear</button>
+				<button type="submit" onclick="document.getElementById('status').innerHTML = '';">Submit</button>
+			</span>
+			<span style="position: relative; margin: 0;">
+				<img style="margin: 0; position: absolute; bottom: 0; right: 0; width: min-content;" alt="loading..." class="htmx-indicator" height="32px" width="32px" src="/static/assets/loading.svg"/>
+				<span id="status" style="display: flex; justify-content: end;"></span>
+			</span>
+		</div>
+	</form>
+}
+
+templ ContactStatus(status string) {
+	<p style="margin: 0;">{ status }</p>
+}

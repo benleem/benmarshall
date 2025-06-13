@@ -4,8 +4,7 @@ templ Layout(contents templ.Component, title string) {
 	<!DOCTYPE html>
 	<html lang="en">
 		@head(title)
-		// <body hx-boost="true" hx-target="main">
-		<body>
+		<body hx-boost="true">
 			<main>
 				@contents
 			</main>
@@ -26,7 +25,7 @@ templ head(title string) {
 		<link rel="icon" type="image/png" href="/static/assets/cyberslug-nobg.png"/>
 		<link rel="stylesheet" href="/static/styles/reset.css"/>
 		<link rel="stylesheet" href="/static/styles/monospace-web.css"/>
-		// <script src="/static/scripts/htmx.min.js"></script>
+		<script src="/static/scripts/htmx.min.js"></script>
 		<script defer src="/static/scripts/components.js"></script>
 	</head>
 }

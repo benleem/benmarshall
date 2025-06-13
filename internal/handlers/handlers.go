@@ -13,10 +13,12 @@ func Init(key string) *http.ServeMux {
 
 	fileServer := http.FileServer(neuteredFileSystem{http.Dir("./static")})
 	home := routes.NewHomeHandler()
+	contact := routes.NewContactHandler(key)
 
 	mux.Handle("GET /static", http.NotFoundHandler())
 	mux.Handle("GET /static/", http.StripPrefix("/static", fileServer))
 	mux.Handle("GET /{$}", htmxMiddleware(http.HandlerFunc(home.Get)))
+	mux.Handle("POST /contact", htmxMiddleware(http.HandlerFunc(contact.Post)))
 
 	return mux
 }

@@ -1,0 +1,32 @@
+package components
+
+type Projects = map[string][]Project
+
+type Project struct {
+	Name        string
+	Description string
+	Tags        []string
+	Github      string
+	Live        string
+	Image       string
+}
+
+templ ProjectTables(projects Projects, projectKeys []string) {
+	for _, key := range projectKeys {
+		<h2>{ key }</h2>
+		<table>
+			<tbody>
+				for _, project := range projects[key] {
+					<tr>
+						<td class="width-min">
+							{ project.Name }
+						</td>
+						<td class="width-auto">
+							{ project.Description }
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+}

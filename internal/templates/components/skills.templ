@@ -1,0 +1,33 @@
+package components
+
+type Skills = map[string][]string
+
+templ SkillsSection(skills Skills, skillKeys []string) {
+	<div class="tree-wrapper">
+		<ul class="tree">
+			<li>
+				<p style="margin-bottom: 0;">
+					<strong>~/skills</strong>
+				</p>
+				<ul class="incremental">
+					for _, key := range skillKeys {
+						<li>
+							{ key }
+							<ul class="incremental">
+								for _, skill := range skills[key] {
+									<li>
+										{ skill }
+										<br/>
+									</li>
+								}
+							</ul>
+						</li>
+					}
+				</ul>
+			</li>
+		</ul>
+		<div>
+			<img src="/static/assets/cyberslug-nobg.png" alt="cyberslug" srcset=""/>
+		</div>
+	</div>
+}
