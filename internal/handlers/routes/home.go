@@ -27,11 +27,11 @@ func NewHomeHandler() *HomeHandler {
 
 	projectKeys := []string{"experience", "projects"}
 	projects := components.Projects{
-		projectKeys[0]: {{Name: "Love Together", Description: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at tortor mauris. Suspendisse at dolor ac eros iaculis tristique eget tincidunt quam. Suspendisse eu accumsan sapien. Suspendisse potenti. Sed auctor massa diam, at sodales mi gravida non. Etiam a vestibulum sem, at iaculis odio. Sed ut velit vitae risus suscipit interdum a nec dui. Nam pellentesque interdum fringilla. ", Tags: []string{"asdad", "sadasd"}, Github: "", Live: "", Image: ""}},
+		projectKeys[0]: {{Name: `love together`, Description: "relationship coaching web application", Tags: []string{"TypeScript", "NextJs", "Tailwind"}, Github: "", Live: "https://www.love-together.com/", Image: "https://res.cloudinary.com/ben-dev/image/upload/v1677532380/portfolio/love-together_zkbqt3.png"}},
 		projectKeys[1]: {
-			{Name: "prattl", Description: "ipsum dolor sit amet, consectetur adipiscing elit. Cras at tortor mauris. Sed ut velit vitae risus suscipit interdum a nec dui. Nam pellentesque interdum fringilla. ", Tags: []string{"asdad", "sadasd"}, Github: "", Live: "", Image: ""},
-			{Name: "3ohtwo", Description: "Cras at tortor mauris. Suspendisse at dolor ac eros iaculis tristique eget tincidunt quam. Suspendisse eu accumsan sapien. Suspendisse potenti. Sed auctor massa diam, at sodales mi gravida non. Etiam a vestibulum sem, at iaculis odio. Sed ut velit vitae risus suscipit interdum a nec dui. Nam pellentesque interdum fringilla. ", Tags: []string{"asdad", "sadasd"}, Github: "", Live: "", Image: ""},
-			{Name: "goscrape", Description: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at tortor mauris. Suspendisse at dolor ac eros iaculis tristique eget tincidunt quam. Suspendisse eu accumsan sapien. Suspendisse potenti. Sed auctor massa diam, ", Tags: []string{"asdad", "sadasd"}, Github: "", Live: "", Image: ""},
+			{Name: "prattl", Description: "cli tool for local transcriptions", Tags: []string{"Go", "Python"}, Github: "https://github.com/prattlOrg/prattl", Live: "https://prattl.co/", Image: "https://github.com/prattlOrg/prattl/blob/main/assets/logo.png"},
+			{Name: "3ohtwo", Description: "mark your favorite places, see other people's", Tags: []string{"Typescript", "React Native Expo", "SqlLite"}, Github: "https://github.com/benleem/3ohtwo", Live: "", Image: ""},
+			{Name: "goscrape", Description: "web crawling and scraping cli tool", Tags: []string{"Go", "Redis", "SqlLite"}, Github: "", Live: "", Image: ""},
 		},
 	}
 

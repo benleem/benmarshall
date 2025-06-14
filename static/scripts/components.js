@@ -14,12 +14,12 @@ class TextArea extends HTMLElement {
 		});
 
 		this.form.addEventListener("reset", () => {
-			this.formReset();
+			this.handleFormReset();
 		});
 		// htmx.process(this);
 	}
 
-	formReset = () => {
+	handleFormReset = () => {
 		this.input.style.height = "min-content";
 	};
 
@@ -35,7 +35,7 @@ class TextArea extends HTMLElement {
 
 	disconnectedCallback() {
 		this.input.removeEventListener("input", this.resize);
-		this.form.removeEventListener("reset", this.formReset);
+		this.form.removeEventListener("reset", this.handleFormReset);
 	}
 }
 

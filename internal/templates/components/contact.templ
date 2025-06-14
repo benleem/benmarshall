@@ -10,16 +10,16 @@ templ Contact() {
 	>
 		<label>
 			Name
-			<input type="text" name="name" placeholder="John Doe"/>
+			<input required type="text" name="name" placeholder="John Doe"/>
 		</label>
 		<label>
 			Email Address
-			<input type="email" name="email" placeholder="johndoe@example.com"/>
+			<input required type="email" name="email" placeholder="johndoe@example.com"/>
 		</label>
 		<label>
 			Message
 			<text-area>
-				<textarea style="resize: none;" rows="3" name="message" id="contact-message" placeholder="Your message..."></textarea>
+				<textarea required style="resize: none;" rows="3" name="message" id="contact-message" placeholder="Your message..."></textarea>
 			</text-area>
 		</label>
 		<div class="grid">

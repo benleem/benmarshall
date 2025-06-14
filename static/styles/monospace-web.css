@@ -481,6 +481,19 @@ label textarea {
 	--grid-cells: 9;
 }
 
+/* CUSTOM CLASSES */
+.project-links {
+	margin-top: var(--line-height);
+}
+
+.project-name {
+	margin-top: var(--line-height);
+}
+
+.project-tag {
+	border: red;
+}
+
 /* DEBUG UTILITIES */
 
 .debug .debug-grid {

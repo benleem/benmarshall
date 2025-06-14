@@ -54,14 +54,13 @@ func (h *ContactHandler) Post(w http.ResponseWriter, r *http.Request) {
 		// http.Error(w, fmt.Sprintf("error sending email: %s", err.Error()), http.StatusInternalServerError)
 		fmt.Println(fmt.Sprintf("error sending email: %s", err.Error()))
 		components.ContactStatus("failed").Render(r.Context(), w)
-		return
 	}
 	bodyBytes, err := io.ReadAll(resp.Body)
+	// fmt.Println(string(bodyBytes))
 	if err != nil {
 		// http.Error(w, fmt.Sprintf("error reading web3 response body: %s", err.Error()), http.StatusInternalServerError)
 		fmt.Println(fmt.Sprintf("error reading web3 response body: %s", err.Error()))
 		components.ContactStatus("failed").Render(r.Context(), w)
-		return
 	}
 	defer resp.Body.Close()
 
@@ -75,10 +74,23 @@ func (h *ContactHandler) Post(w http.ResponseWriter, r *http.Request) {
 			// http.Error(w, fmt.Sprintf("error unmarshalling json: %s", err.Error()), http.StatusInternalServerError)
 			fmt.Println(fmt.Sprintf("error unmarshalling json: %s", err.Error()))
 			components.ContactStatus("failed").Render(r.Context(), w)
-			return
 		}
 		// http.Error(w, fmt.Sprintf("error sending email: %s", web3Response.Message), http.StatusInternalServerError)
 		fmt.Println(fmt.Sprintf("error sending email: %s", web3Response.Message))
-		components.ContactStatus("failed").Render(r.Context(), w)
+		if strings.Contains(web3Response.Message, "spam") {
+			components.ContactStatus("failed: spam detected").Render(r.Context(), w)
+		} else if strings.Contains(web3Response.Message, "rate limited") {
+			components.ContactStatus("failed: rate limited").Render(r.Context(), w)
+		} else {
+
+		}
+
+		// case strings.Contains(web3Response.Message, "spam"):
+		// 	components.ContactStatus("failed: spam detected").Render(r.Context(), w)
+		// case "Rate limited":
+		// 	components.ContactStatus("failed: rate limited").Render(r.Context(), w)
+		// default:
+		// 	components.ContactStatus("failed").Render(r.Context(), w)
+		// }
 	}
 }
