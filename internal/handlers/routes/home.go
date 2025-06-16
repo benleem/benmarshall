@@ -6,31 +6,33 @@ import (
 
 	"github.com/a-h/templ"
 	"github.com/benleem/benmarshall/internal/templates"
+	"github.com/benleem/benmarshall/internal/templates/components"
 	"github.com/benleem/benmarshall/internal/templates/pages"
 )
 
 type HomeHandler struct {
-	skills      pages.Skills
+	skills      components.Skills
 	skillKeys   []string
-	projects    pages.Projects
+	projects    components.Projects
 	projectKeys []string
 }
 
 func NewHomeHandler() *HomeHandler {
 	skillKeys := []string{"tools", "languages", "technologies"}
-	skills := pages.Skills{
+	skills := components.Skills{
 		skillKeys[0]: []string{"git"},
 		skillKeys[1]: []string{"golang", "typescript", "javascript"},
 		skillKeys[2]: []string{"docker", "html", "css", "tailwind", "react", "nextjs", "htmx"},
 	}
 
 	projectKeys := []string{"experience", "projects"}
-	projects := pages.Projects{
-		projectKeys[0]: {{Name: "Love Together", Description: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at tortor mauris. Suspendisse at dolor ac eros iaculis tristique eget tincidunt quam. Suspendisse eu accumsan sapien. Suspendisse potenti. Sed auctor massa diam, at sodales mi gravida non. Etiam a vestibulum sem, at iaculis odio. Sed ut velit vitae risus suscipit interdum a nec dui. Nam pellentesque interdum fringilla. ", Tags: []string{"asdad", "sadasd"}, Github: "", Live: "", Image: ""}},
+	projects := components.Projects{
+		projectKeys[0]: {{Name: `love together`, Description: "relationship coaching web application", Tags: []string{"typescript", "nextjs", "mongodb", "tailwind"}, Github: "", Live: "https://www.love-together.com/", Image: "https://res.cloudinary.com/ben-dev/image/upload/v1677532380/portfolio/love-together_zkbqt3.png"}},
 		projectKeys[1]: {
-			{Name: "prattl", Description: "ipsum dolor sit amet, consectetur adipiscing elit. Cras at tortor mauris. Sed ut velit vitae risus suscipit interdum a nec dui. Nam pellentesque interdum fringilla. ", Tags: []string{"asdad", "sadasd"}, Github: "", Live: "", Image: ""},
-			{Name: "3ohtwo", Description: "Cras at tortor mauris. Suspendisse at dolor ac eros iaculis tristique eget tincidunt quam. Suspendisse eu accumsan sapien. Suspendisse potenti. Sed auctor massa diam, at sodales mi gravida non. Etiam a vestibulum sem, at iaculis odio. Sed ut velit vitae risus suscipit interdum a nec dui. Nam pellentesque interdum fringilla. ", Tags: []string{"asdad", "sadasd"}, Github: "", Live: "", Image: ""},
-			{Name: "goscrape", Description: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at tortor mauris. Suspendisse at dolor ac eros iaculis tristique eget tincidunt quam. Suspendisse eu accumsan sapien. Suspendisse potenti. Sed auctor massa diam, ", Tags: []string{"asdad", "sadasd"}, Github: "", Live: "", Image: ""},
+			{Name: "prattl", Description: "cli tool for local audio transcriptions", Tags: []string{"go", "python"}, Github: "https://github.com/prattlOrg/prattl", Live: "https://prattl.co/", Image: "/static/assets/prattl.png"},
+			{Name: "goggle earth", Description: "web application for learning about earth, place a pin and see information about the area", Tags: []string{"javascript", "react", "threejs"}, Github: "https://github.com/benleem/threejs-test", Live: "https://goggle-earth.netlify.app/", Image: "https://res.cloudinary.com/ben-dev/image/upload/v1677537530/portfolio/earth_zn3y1v.png"},
+			{Name: "3ohtwo (WIP)", Description: "mobile application for marking your favorite places, and seeing other people's", Tags: []string{"typescript", "react native expo", "sqllite"}, Github: "https://github.com/benleem/3ohtwo", Live: "", Image: ""},
+			{Name: "goscrape (WIP)", Description: "web crawling and scraping cli tool", Tags: []string{"go", "redis", "sqllite"}, Github: "", Live: "", Image: ""},
 		},
 	}
 

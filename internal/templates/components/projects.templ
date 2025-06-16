@@ -1,0 +1,56 @@
+package components
+
+type Projects = map[string][]Project
+
+type Project struct {
+	Name        string
+	Description string
+	Tags        []string
+	Github      templ.SafeURL
+	Live        templ.SafeURL
+	Image       string
+}
+
+templ ProjectTables(projects Projects, projectKeys []string) {
+	for _, key := range projectKeys {
+		<h2>{ key }</h2>
+		<table>
+			<tbody>
+				for _, project := range projects[key] {
+					<tr>
+						<td>
+							<h3>
+								{ project.Name }
+							</h3>
+						</td>
+						<td class="width-auto">
+							<div class="project-links">
+								if project.Live != "" {
+									<a href={ project.Live } target="_blank" rel="noopener noreferrer">live</a>
+								}
+								if project.Github != "" {
+									<a href={ project.Github } target="_blank" rel="noopener noreferrer">code</a>
+								}
+							</div>
+							// <img style="max-width: 400px; margin: auto" src={ project.Image } alt={ project.Name } srcset=""/>
+							<p>
+								for i, tag := range project.Tags {
+									if i == 0 {
+										{ "(" }{ tag }{ ", " }
+									} else if len(project.Tags) - 1 != i {
+										{ tag }{ ", " }
+									} else {
+										{ tag }{ ")" }
+									}
+								}
+							</p>
+							<p>
+								{ project.Description }
+							</p>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+}

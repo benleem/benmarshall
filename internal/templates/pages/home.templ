@@ -1,69 +1,16 @@
 package pages
 
-type Skills = map[string][]string
+import "github.com/benleem/benmarshall/internal/templates/components"
 
-type Projects = map[string][]Project
-
-type Project struct {
-	Name        string
-	Description string
-	Tags        []string
-	Github      string
-	Live        string
-	Image       string
-}
-
-templ Home(skills Skills, skillKeys []string, projects Projects, projectKeys []string) {
+templ Home(skills components.Skills, skillKeys []string, projects components.Projects, projectKeys []string) {
 	<h1>benmarshall</h1>
 	<div>
 		<p>software developer specializing in web technologies</p>
 		<a href="https://www.linkedin.com/in/benjamin-marshall-609906196/" target="_blank" rel="noopener noreferrer">linkedin</a>
 		<a href="https://github.com/benleem" target="_blank" rel="noopener noreferrer">github</a>
 	</div>
-	<div class="tree-wrapper">
-		<ul class="tree">
-			<li>
-				<p style="margin-bottom: 0;">
-					<strong>~/skills</strong>
-				</p>
-				<ul class="incremental">
-					for _, key := range skillKeys {
-						<li>
-							{ key }
-							<ul class="incremental">
-								for _, skill := range skills[key] {
-									<li>
-										{ skill }
-										<br/>
-									</li>
-								}
-							</ul>
-						</li>
-					}
-				</ul>
-			</li>
-		</ul>
-		<div>
-			<img src="/static/assets/cyberslug-nobg.png" alt="cyberslug" srcset=""/>
-		</div>
-	</div>
-	for _, key := range projectKeys {
-		<h2>{ key }</h2>
-		<table>
-			<tbody>
-				for _, project := range projects[key] {
-					<tr>
-						<td class="width-min">
-							{ project.Name }
-						</td>
-						<td class="width-auto">
-							{ project.Description }
-						</td>
-					</tr>
-				}
-			</tbody>
-		</table>
-	}
+	@components.SkillsSection(skills, skillKeys)
+	@components.ProjectTables(projects, projectKeys)
 	<hr/>
-	<p>contact me pls</p>
+	@components.Contact()
 }

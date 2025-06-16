@@ -381,9 +381,11 @@ label {
 	line-height: var(--line-height);
 	font-weight: var(--font-weight-medium);
 	margin: 0;
+	margin-bottom: var(--line-height);
 }
 
-label input {
+label input,
+label textarea {
 	width: 100%;
 }
 
@@ -479,6 +481,19 @@ label input {
 	--grid-cells: 9;
 }
 
+/* CUSTOM CLASSES */
+.project-links {
+	margin-top: var(--line-height);
+}
+
+.project-name {
+	margin-top: var(--line-height);
+}
+
+.project-tag {
+	border: red;
+}
+
 /* DEBUG UTILITIES */
 
 .debug .debug-grid {
@@ -508,4 +523,29 @@ label input {
 
 .debug-toggle-label {
 	text-align: right;
+}
+
+/* htmx */
+
+.htmx-indicator {
+	-webkit-animation: spin 3s linear infinite;
+	-moz-animation: spin 3s linear infinite;
+	animation: spin 3s linear infinite;
+}
+
+@-moz-keyframes spin {
+	100% {
+		-moz-transform: rotate(360deg);
+	}
+}
+@-webkit-keyframes spin {
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+@keyframes spin {
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
 }
