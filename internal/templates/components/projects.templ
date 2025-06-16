@@ -32,6 +32,7 @@ templ ProjectTables(projects Projects, projectKeys []string) {
 									<a href={ project.Github } target="_blank" rel="noopener noreferrer">code</a>
 								}
 							</div>
+							// <img style="max-width: 400px; margin: auto" src={ project.Image } alt={ project.Name } srcset=""/>
 							<p>
 								for i, tag := range project.Tags {
 									if i == 0 {
@@ -43,7 +44,6 @@ templ ProjectTables(projects Projects, projectKeys []string) {
 									}
 								}
 							</p>
-							<img src={ project.Image } width="100px" alt={ project.Name } srcset=""/>
 							<p>
 								{ project.Description }
 							</p>
