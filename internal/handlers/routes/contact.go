@@ -32,11 +32,14 @@ func NewContactHandler(key string) *ContactHandler {
 }
 
 func (h *ContactHandler) Post(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r.Context().Value("htmx"))
+
 	err := r.ParseForm()
 	if err != nil {
 		// http.Error(w, fmt.Sprintf("error parsing form: %s", err.Error()), http.StatusInternalServerError)
 		fmt.Printf("error parsing form: %s\n", err.Error())
 		components.ContactStatus("failed").Render(r.Context(), w)
+		return
 	}
 
 	client := &http.Client{}
@@ -48,6 +51,7 @@ func (h *ContactHandler) Post(w http.ResponseWriter, r *http.Request) {
 		// http.Error(w, fmt.Sprintf("error sending email: %s", err.Error()), http.StatusInternalServerError)
 		fmt.Printf("error sending email: %s\n", err.Error())
 		components.ContactStatus("failed").Render(r.Context(), w)
+		return
 	}
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	resp, err := client.Do(req)
@@ -55,15 +59,17 @@ func (h *ContactHandler) Post(w http.ResponseWriter, r *http.Request) {
 		// http.Error(w, fmt.Sprintf("error sending email: %s", err.Error()), http.StatusInternalServerError)
 		fmt.Printf("error sending email: %s\n", err.Error())
 		components.ContactStatus("failed").Render(r.Context(), w)
+		return
 	}
+	defer resp.Body.Close()
 	bodyBytes, err := io.ReadAll(resp.Body)
-	// fmt.Println(string(bodyBytes))
+	fmt.Println(string(bodyBytes))
 	if err != nil {
 		// http.Error(w, fmt.Sprintf("error reading web3 response body: %s", err.Error()), http.StatusInternalServerError)
 		fmt.Printf("error reading web3 response body: %s\n", err.Error())
 		components.ContactStatus("failed").Render(r.Context(), w)
+		return
 	}
-	defer resp.Body.Close()
 
 	if resp.StatusCode == http.StatusOK {
 		// fmt.Printf("%v", resp.StatusCode)
@@ -75,6 +81,7 @@ func (h *ContactHandler) Post(w http.ResponseWriter, r *http.Request) {
 			// http.Error(w, fmt.Sprintf("error unmarshalling json: %s", err.Error()), http.StatusInternalServerError)
 			fmt.Printf("error unmarshalling json: %s\n", err.Error())
 			components.ContactStatus("failed").Render(r.Context(), w)
+			return
 		}
 		// http.Error(w, fmt.Sprintf("error sending email: %s", web3Response.Message), http.StatusInternalServerError)
 		fmt.Printf("error sending email: %s\n", web3Response.Message)
