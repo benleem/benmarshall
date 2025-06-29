@@ -63,7 +63,7 @@ func (h *ContactHandler) Post(w http.ResponseWriter, r *http.Request) {
 	}
 	defer resp.Body.Close()
 	bodyBytes, err := io.ReadAll(resp.Body)
-	fmt.Println(string(bodyBytes))
+	// fmt.Println(resp.Header)
 	if err != nil {
 		// http.Error(w, fmt.Sprintf("error reading web3 response body: %s", err.Error()), http.StatusInternalServerError)
 		fmt.Printf("error reading web3 response body: %s\n", err.Error())
@@ -71,10 +71,13 @@ func (h *ContactHandler) Post(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if resp.StatusCode == http.StatusOK {
+	switch resp.StatusCode {
+	case http.StatusOK:
 		// fmt.Printf("%v", resp.StatusCode)
 		components.ContactStatus("success").Render(r.Context(), w)
-	} else {
+	case http.StatusForbidden:
+		components.ContactStatus("failed: ip banned").Render(r.Context(), w)
+	default:
 		var web3Response Web3ErrorResponse
 		err = json.Unmarshal(bodyBytes, &web3Response)
 		if err != nil {
