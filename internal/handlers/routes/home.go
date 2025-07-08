@@ -31,8 +31,8 @@ func NewHomeHandler() *HomeHandler {
 		projectKeys[1]: {
 			{Name: "prattl", Description: "cli tool for local audio transcriptions", Tags: []string{"go", "python"}, Github: "https://github.com/prattlOrg/prattl", Live: "https://prattl.co/", Image: "/static/assets/prattl.png"},
 			{Name: "goggle earth", Description: "web application for learning about earth, place a pin and see information about the area", Tags: []string{"javascript", "react", "threejs"}, Github: "https://github.com/benleem/threejs-test", Live: "https://goggle-earth.netlify.app/", Image: "https://res.cloudinary.com/ben-dev/image/upload/v1677537530/portfolio/earth_zn3y1v.png"},
-			{Name: "3ohtwo (WIP)", Description: "mobile application for marking your favorite places, and seeing other people's", Tags: []string{"typescript", "react native expo", "sqllite"}, Github: "https://github.com/benleem/3ohtwo", Live: "", Image: ""},
-			{Name: "goscrape (WIP)", Description: "web crawling and scraping cli tool", Tags: []string{"go", "redis", "sqllite"}, Github: "", Live: "", Image: ""},
+			{Name: "3ohtwo (WIP)", Description: "mobile application for marking your favorite places, and seeing other people's", Tags: []string{"typescript", "react native expo", "sqlite"}, Github: "https://github.com/benleem/3ohtwo", Live: "", Image: ""},
+			{Name: "goscrape (WIP)", Description: "web crawling and scraping cli tool", Tags: []string{"go", "redis", "sqlite"}, Github: "", Live: "", Image: ""},
 		},
 	}
 
